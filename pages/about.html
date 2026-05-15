@@ -3,34 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us</title>
-    <style>
-        body { font-family: sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; }
-        .contributors { display: flex; gap: 20px; margin-top: 20px; }
-        .person { border: 1px solid #ccc; padding: 15px; border-radius: 8px; flex: 1; text-align: center; }
-        h1 { color: #333; }
-    </style>
+    <title>About Us - Note Sharing</title>
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 
-    <h1>About Us</h1>
-    <p>Welcome to our project! We are a passionate team dedicated to building great things.</p>
+    <header>
+        <h1>About Us</h1>
+    </header>
 
-    <h2>Our Contributors</h2>
-    <div class="contributors">
-        <div class="person">
-            <h3>hasib2050</h3>
-            <p>Lead Developer, Contributor</p>
+    <nav>
+        <a href="/">Home</a>
+        <a href="#">Notes</a>
+        <a href="about.html" class="active">About</a>
+    </nav>
+
+    <main>
+        <section class="intro">
+            <h2>Empowering Knowledge Sharing</h2>
+            <p>Our platform is built to help students collaborate and share their study notes effortlessly. Join our growing community today.</p>
+        </section>
+
+        <h2>Our Contributors</h2>
+        <div class="contributors-grid">
+            <div class="person">
+                <h3>hasib2050</h3>
+                <p><strong>Lead Developer</strong></p>
+                <p>Message 1</p>
+            </div>
+            <div class="person">
+                <h3>oceanmallik</h3>
+                <p><strong>Developer, Website Manager, Github Maintainer</strong></p>
+                <p>Crafting experiences that make studying delightful.</p>
+            </div>
+            <div class="person">
+                <h3>Person X</h3>
+                <p><strong>Contributor</strong></p>
+                <p>Message 3</p>
+            </div>
         </div>
-        <div class="person">
-            <h3>oceanmallik</h3>
-            <p>Developer, Website Designer, Github Manager</p>
-        </div>
-        <div class="person">
-            <h3>Charlie Davis</h3>
-            <p>Contributor</p>
-        </div>
-    </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Note Sharing Community</p>
+    </footer>
 
 </body>
 </html>
