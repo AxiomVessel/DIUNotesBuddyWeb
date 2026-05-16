@@ -5,6 +5,36 @@ NOTES_DIR = "notes"
 EXAM_FOLDERS = {"Mid", "Final"}
 SKIP_EXTENSIONS = {".html", ".json"}
 
+def process_folder(folder_path):
+    items = os.listdir(folder_path)
+    
+    # Separate files and folders
+    files = sorted([
+        f for f in items
+        if os.path.isfile(os.path.join(folder_path, f))
+        and os.path.splitext(f)[1].lower() not in SKIP_EXTENSIONS
+    ])
+    
+    folders = sorted([
+        f for f in items
+        if os.path.isdir(os.path.join(folder_path, f))
+    ])
+
+    # Write files.json
+    with open(os.path.join(folder_path, "files.json"), "w") as f:
+        json.dump(files, f, indent=2)
+
+    # Write folders.json
+    with open(os.path.join(folder_path, "folders.json"), "w") as f:
+        json.dump(folders, f, indent=2)
+
+    print(f"Updated: {folder_path} → files: {files} | folders: {folders}")
+
+    # Recursively process subfolders
+    for folder in folders:
+        process_folder(os.path.join(folder_path, folder))
+
+
 for year in os.listdir(NOTES_DIR):
     year_path = os.path.join(NOTES_DIR, year)
     if not os.path.isdir(year_path): continue
@@ -22,16 +52,4 @@ for year in os.listdir(NOTES_DIR):
                 if not os.path.isdir(exam_path): continue
                 if exam not in EXAM_FOLDERS: continue
 
-                # List only actual note files
-                files = sorted([
-                    f for f in os.listdir(exam_path)
-                    if os.path.isfile(os.path.join(exam_path, f))
-                    and os.path.splitext(f)[1].lower() not in SKIP_EXTENSIONS
-                ])
-
-                # Write files.json
-                json_path = os.path.join(exam_path, "files.json")
-                with open(json_path, "w") as f:
-                    json.dump(files, f, indent=2)
-
-                print(f"Updated: {json_path} → {files}")
+                process_folder(exam_path)

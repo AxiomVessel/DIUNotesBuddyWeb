@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Notes | Explorer</title>
-  <link rel="stylesheet" href="../../../../../explorer.css">
+  <link rel="stylesheet" href="../../../../../../explorer.css">
 </head>
-
 <body>
 
   <aside>
@@ -29,7 +27,6 @@
   <script>
     const grid = document.getElementById('file-grid');
 
-    // Load folders first
     fetch('folders.json')
       .then(res => res.json())
       .then(folders => {
@@ -42,7 +39,6 @@
         });
       });
 
-    // Then load files
     fetch('files.json')
       .then(res => res.json())
       .then(files => {
@@ -58,5 +54,4 @@
   </script>
 
 </body>
-
 </html>
