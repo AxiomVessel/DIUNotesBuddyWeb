@@ -2,10 +2,9 @@ import os
 import json
 
 NOTES_DIR = "notes"
-EXAM_FOLDERS = {"Mid", "Final", "Assignment", "Presentation", "QN"}
+EXAM_FOLDERS = {"Mid", "Final", "Assignment", "Presentation"}
 FLAT_FOLDERS = {"Assignment", "Presentation"}
 DEEP_FOLDERS = {"Mid", "Final"}
-ONE_LEVEL_FOLDERS = {"QN"}
 SKIP_EXTENSIONS = {".html", ".json"}
 
 print("=== Starting Debug ===")
@@ -94,9 +93,16 @@ for year in os.listdir(NOTES_DIR):
         if not os.path.isdir(semester_path): continue
         print(f"  Semester: {semester}")
 
+        # Handle QN directly under semester
+        qn_path = os.path.join(semester_path, "QN")
+        if os.path.isdir(qn_path):
+            print(f"    Found QN directly under {semester}")
+            process_one_level_folder(qn_path)
+
         for subject in os.listdir(semester_path):
             subject_path = os.path.join(semester_path, subject)
             if not os.path.isdir(subject_path): continue
+            if subject == "QN": continue  # already handled above
             print(f"    Subject: {subject}")
 
             for exam in os.listdir(subject_path):
@@ -111,9 +117,6 @@ for year in os.listdir(NOTES_DIR):
                 if exam in FLAT_FOLDERS:
                     print("processing as FLAT")
                     process_flat_folder(exam_path)
-                elif exam in ONE_LEVEL_FOLDERS:
-                    print("processing as ONE LEVEL")
-                    process_one_level_folder(exam_path)
                 elif exam in DEEP_FOLDERS:
                     print("processing as DEEP")
                     process_deep_folder(exam_path)
