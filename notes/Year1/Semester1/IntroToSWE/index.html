@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Notes | Explorer</title>
+  <title>1st Semester Notes | Explorer</title>
   <link rel="stylesheet" href="../../../../explorer.css">
 </head>
 
@@ -19,29 +19,16 @@
 
   <main>
     <header>
-      <h1>Files</h1>
+      <h1>Select A Subject</h1>
     </header>
 
-    <section class="file-grid" id="file-grid">
-      <!-- Files will be loaded here automatically -->
+    <section class="file-grid">
+      <a href="Mid/" class="file-card">
+        <div class="folder-icon">📂</div>
+        <span class="file-name">Mid</span>
+      </a>
     </section>
   </main>
-
-  <script>
-    fetch('files.json')
-      .then(res => res.json())
-      .then(files => {
-        const grid = document.getElementById('file-grid');
-        files.forEach(file => {
-          const name = file.replace(/\.[^/.]+$/, ''); // removes extension
-          grid.innerHTML += `
-            <a href="${file}" class="file-card">
-              <div class="folder-icon">📄</div>
-              <span class="file-name">${name}</span>
-            </a>`;
-        });
-      });
-  </script>
 
 </body>
 
