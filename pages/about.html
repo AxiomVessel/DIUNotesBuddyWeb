@@ -3,22 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - Note Sharing</title>
+    <title>About Us - DIU Notes Buddy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-
-    <header>
-        <h1>About Us</h1>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="brand" href="/">DIU Notes Buddy</a>
+            <button id="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
+            <nav class="site-nav" id="site-nav">
+                <a href="/">Home</a>
+                <a href="/notes/">Notes</a>
+                <a href="about.html" class="active">About</a>
+            </nav>
+        </div>
+        <div class="hero small-hero">
+            <div class="container">
+                <h1>About DIU Notes Buddy</h1>
+                <p>Community-driven notes and study resources, organized for easier learning.</p>
+            </div>
+        </div>
     </header>
 
-    <nav>
-        <a href="/">Home</a>
-        <a href="#">Notes</a>
-        <a href="about.html" class="active">About</a>
-    </nav>
-
-    <main>
+    <main class="container main-content">
         <section class="intro">
             <h2>Empowering Knowledge Sharing</h2>
             <p>Our platform is built to help students collaborate and share their study notes effortlessly. Join our growing community today.</p>
@@ -30,26 +40,42 @@
                 <h3>hasib2050</h3>
                 <p><strong>Lead Developer</strong></p>
                 <p>Message 1</p>
-                <a href="https://github.com/hasib2050">Visit GitHub</a>
+                <a class="profile-link" href="https://github.com/hasib2050">Visit GitHub</a>
             </div>
             <div class="person">
                 <h3>oceanmallik</h3>
                 <p><strong>Developer, Website Manager, Github Maintainer</strong></p>
                 <p>Crafting experiences that make studying delightful.</p>
-                <a href="https://link.oceanmallik.com">Visit My Stuff</a>
+                <a class="profile-link" href="https://link.oceanmallik.com">Visit My Stuff</a>
             </div>
             <div class="person">
                 <h3>Person X</h3>
                 <p><strong>Contributor</strong></p>
                 <p>Message 3</p>
-                <a href="#">Visit Something</a>
+                <a class="profile-link" href="#">Visit Something</a>
             </div>
         </div>
     </main>
 
-    <footer>
-        <p>&copy; 2026 Note Sharing Community</p>
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <p>&copy; 2026 DIU Notes Buddy</p>
+            <nav class="footer-nav">
+                <a href="/">Home</a>
+                <a href="/pages/about.html">About</a>
+            </nav>
+        </div>
     </footer>
+
+    <script>
+        const toggle = document.getElementById('nav-toggle');
+        const nav = document.getElementById('site-nav');
+        toggle.addEventListener('click', () => {
+            const expanded = toggle.getAttribute('aria-expanded') === 'true';
+            toggle.setAttribute('aria-expanded', String(!expanded));
+            nav.classList.toggle('open');
+        });
+    </script>
 
 </body>
 </html>
