@@ -4,29 +4,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DIU Notes Buddy | Your Study Companion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
-        <h1>DIU Notes Buddy</h1>
-        <p>Your ultimate destination for lecture notes and study materials</p>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="brand" href="/">DIU Notes Buddy</a>
+            <button id="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
+            <nav class="site-nav" id="site-nav">
+                <a href="/" class="active">Home</a>
+                <a href="/notes/">Notes</a>
+                <a href="/pages/about.html">About</a>
+            </nav>
+        </div>
+        <div class="hero">
+            <div class="container">
+                <h1>Notes, Presentations & Past Exams — Organized.</h1>
+                <p>Free and community-driven study materials for Daffodil International University students.</p>
+                <a class="cta" href="/notes/">Browse Notes</a>
+            </div>
+        </div>
     </header>
 
-    <nav>
-        <a href="/">Home</a>
-        <a href="#">Notes</a>
-        <a href="/pages/about.html">About</a>
-    </nav>
-
-    <main>
-        <h2>Welcome to DIU Notes Buddy</h2>
-        <p>Helping Daffodil International University students excel in their studies.</p>
+    <main class="container main-content">
+        <section class="features">
+            <h2>Popular Collections</h2>
+            <div class="cards">
+                <article class="note-card">
+                    <h3>BNS 101 — Assignments & Finals</h3>
+                    <p>Collections of assignments, presentations and previous finals for quick revision.</p>
+                    <a href="/notes/1st%20Semister/BNS_101/">Open</a>
+                </article>
+                <article class="note-card">
+                    <h3>CF — Course Materials</h3>
+                    <p>Code examples, lab reports and presentations organized by topic.</p>
+                    <a href="/notes/1st%20Semister/CF/">Open</a>
+                </article>
+                <article class="note-card">
+                    <h3>English 101 — Past Questions</h3>
+                    <p>Previous year questions and sample answers to help you prepare.</p>
+                    <a href="/notes/1st%20Semister/English_101/">Open</a>
+                </article>
+            </div>
+        </section>
     </main>
 
-    <footer>
-        <p>&copy; 2026 DIU Notes Buddy. All rights reserved.</p>
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <p>&copy; 2026 DIU Notes Buddy. All rights reserved.</p>
+            <nav class="footer-nav">
+                <a href="/">Home</a>
+                <a href="/pages/about.html">About</a>
+            </nav>
+        </div>
     </footer>
+
+    <script>
+        const toggle = document.getElementById('nav-toggle');
+        const nav = document.getElementById('site-nav');
+        toggle.addEventListener('click', () => {
+            const expanded = toggle.getAttribute('aria-expanded') === 'true';
+            toggle.setAttribute('aria-expanded', String(!expanded));
+            nav.classList.toggle('open');
+        });
+    </script>
 
 </body>
 </html>
