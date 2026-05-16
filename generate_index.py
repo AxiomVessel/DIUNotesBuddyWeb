@@ -2,11 +2,27 @@ import os
 import json
 
 NOTES_DIR = "notes"
-EXAM_FOLDERS = {"Mid", "Final", "Assignment", "Presentation"}
+EXAM_FOLDERS = {"Mid", "Final", "Assignment", "Presentation", "QN"}
 FLAT_FOLDERS = {"Assignment", "Presentation"}
+DEEP_FOLDERS = {"Mid", "Final"}
+ONE_LEVEL_FOLDERS = {"QN"}
 SKIP_EXTENSIONS = {".html", ".json"}
 
-def process_folder(folder_path):
+
+def process_flat_folder(folder_path):
+    files = sorted([
+        f for f in os.listdir(folder_path)
+        if os.path.isfile(os.path.join(folder_path, f))
+        and os.path.splitext(f)[1].lower() not in SKIP_EXTENSIONS
+    ])
+
+    with open(os.path.join(folder_path, "files.json"), "w") as f:
+        json.dump(files, f, indent=2)
+
+    print(f"Updated: {folder_path} → files: {files}")
+
+
+def process_one_level_folder(folder_path):
     items = os.listdir(folder_path)
 
     files = sorted([
@@ -29,20 +45,33 @@ def process_folder(folder_path):
     print(f"Updated: {folder_path} → files: {files} | folders: {folders}")
 
     for folder in folders:
-        process_folder(os.path.join(folder_path, folder))
+        process_flat_folder(os.path.join(folder_path, folder))
 
 
-def process_flat_folder(folder_path):
+def process_deep_folder(folder_path):
+    items = os.listdir(folder_path)
+
     files = sorted([
-        f for f in os.listdir(folder_path)
+        f for f in items
         if os.path.isfile(os.path.join(folder_path, f))
         and os.path.splitext(f)[1].lower() not in SKIP_EXTENSIONS
+    ])
+
+    folders = sorted([
+        f for f in items
+        if os.path.isdir(os.path.join(folder_path, f))
     ])
 
     with open(os.path.join(folder_path, "files.json"), "w") as f:
         json.dump(files, f, indent=2)
 
-    print(f"Updated: {folder_path} → files: {files}")
+    with open(os.path.join(folder_path, "folders.json"), "w") as f:
+        json.dump(folders, f, indent=2)
+
+    print(f"Updated: {folder_path} → files: {files} | folders: {folders}")
+
+    for folder in folders:
+        process_deep_folder(os.path.join(folder_path, folder))
 
 
 for year in os.listdir(NOTES_DIR):
@@ -64,5 +93,7 @@ for year in os.listdir(NOTES_DIR):
 
                 if exam in FLAT_FOLDERS:
                     process_flat_folder(exam_path)
-                else:
-                    process_folder(exam_path)
+                elif exam in ONE_LEVEL_FOLDERS:
+                    process_one_level_folder(exam_path)
+                elif exam in DEEP_FOLDERS:
+                    process_deep_folder(exam_path)
