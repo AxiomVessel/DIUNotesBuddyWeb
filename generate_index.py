@@ -8,6 +8,16 @@ DEEP_FOLDERS = {"Mid", "Final"}
 ONE_LEVEL_FOLDERS = {"QN"}
 SKIP_EXTENSIONS = {".html", ".json"}
 
+print("=== Starting Debug ===")
+print(f"Current working directory: {os.getcwd()}")
+print(f"Contents of root: {os.listdir('.')}")
+
+if not os.path.exists(NOTES_DIR):
+    print(f"ERROR: '{NOTES_DIR}' folder not found!")
+    exit()
+
+print(f"\nContents of {NOTES_DIR}/: {os.listdir(NOTES_DIR)}")
+
 
 def process_flat_folder(folder_path):
     files = sorted([
@@ -19,7 +29,7 @@ def process_flat_folder(folder_path):
     with open(os.path.join(folder_path, "files.json"), "w") as f:
         json.dump(files, f, indent=2)
 
-    print(f"Updated: {folder_path} → files: {files}")
+    print(f"  ✅ Flat: {folder_path} → {files}")
 
 
 def process_one_level_folder(folder_path):
@@ -42,7 +52,7 @@ def process_one_level_folder(folder_path):
     with open(os.path.join(folder_path, "folders.json"), "w") as f:
         json.dump(folders, f, indent=2)
 
-    print(f"Updated: {folder_path} → files: {files} | folders: {folders}")
+    print(f"  ✅ OneLevel: {folder_path} → files: {files} | folders: {folders}")
 
     for folder in folders:
         process_flat_folder(os.path.join(folder_path, folder))
@@ -68,7 +78,7 @@ def process_deep_folder(folder_path):
     with open(os.path.join(folder_path, "folders.json"), "w") as f:
         json.dump(folders, f, indent=2)
 
-    print(f"Updated: {folder_path} → files: {files} | folders: {folders}")
+    print(f"  ✅ Deep: {folder_path} → files: {files} | folders: {folders}")
 
     for folder in folders:
         process_deep_folder(os.path.join(folder_path, folder))
@@ -77,23 +87,35 @@ def process_deep_folder(folder_path):
 for year in os.listdir(NOTES_DIR):
     year_path = os.path.join(NOTES_DIR, year)
     if not os.path.isdir(year_path): continue
+    print(f"\nYear: {year}")
 
     for semester in os.listdir(year_path):
         semester_path = os.path.join(year_path, semester)
         if not os.path.isdir(semester_path): continue
+        print(f"  Semester: {semester}")
 
         for subject in os.listdir(semester_path):
             subject_path = os.path.join(semester_path, subject)
             if not os.path.isdir(subject_path): continue
+            print(f"    Subject: {subject}")
 
             for exam in os.listdir(subject_path):
                 exam_path = os.path.join(subject_path, exam)
                 if not os.path.isdir(exam_path): continue
-                if exam not in EXAM_FOLDERS: continue
+                print(f"      Exam found: '{exam}' — ", end="")
+
+                if exam not in EXAM_FOLDERS:
+                    print(f"SKIPPED (not in EXAM_FOLDERS)")
+                    continue
 
                 if exam in FLAT_FOLDERS:
+                    print("processing as FLAT")
                     process_flat_folder(exam_path)
                 elif exam in ONE_LEVEL_FOLDERS:
+                    print("processing as ONE LEVEL")
                     process_one_level_folder(exam_path)
                 elif exam in DEEP_FOLDERS:
+                    print("processing as DEEP")
                     process_deep_folder(exam_path)
+
+print("\n=== Done ===")
