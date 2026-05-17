@@ -29,6 +29,26 @@
   <script>
     const grid = document.getElementById('file-grid');
 
+    function getFileExtension(filename) {
+      return filename.split('.').pop().toLowerCase();
+    }
+
+    function getFileIcon(ext) {
+      const icons = {
+        'pdf': '📄',
+        'doc': '📋', 'docx': '📋',
+        'xls': '📊', 'xlsx': '📊',
+        'ppt': '🎯', 'pptx': '🎯',
+        'zip': '📦', 'rar': '📦',
+        'txt': '📝', 'md': '📝',
+        'jpg': '🖼️', 'jpeg': '🖼️', 'png': '🖼️', 'gif': '🖼️',
+        'mp4': '🎬', 'avi': '🎬',
+        'mp3': '🎵',
+        'default': '📄'
+      };
+      return icons[ext] || icons['default'];
+    }
+
     // Load folders first
     fetch('folders.json')
       .then(res => res.json())
@@ -36,8 +56,14 @@
         folders.forEach(folder => {
           grid.innerHTML += `
             <a href="${folder}/" class="file-card">
-              <div class="folder-icon">📂</div>
+              <div class="card-header">
+                <div class="icon-wrapper">📁</div>
+                <span class="file-badge badge-folder">Folder</span>
+              </div>
               <span class="file-name">${folder}</span>
+              <div class="file-meta">
+                <span class="file-type">📂 Directory</span>
+              </div>
             </a>`;
         });
       });
@@ -48,10 +74,18 @@
       .then(files => {
         files.forEach(file => {
           const name = file.replace(/\.[^/.]+$/, '');
+          const ext = getFileExtension(file);
+          const icon = getFileIcon(ext);
           grid.innerHTML += `
             <a href="${file}" class="file-card">
-              <div class="folder-icon">📄</div>
+              <div class="card-header">
+                <div class="icon-wrapper">${icon}</div>
+                <span class="file-badge badge-file">File</span>
+              </div>
               <span class="file-name">${name}</span>
+              <div class="file-meta">
+                <span class="file-type">${ext.toUpperCase()}</span>
+              </div>
             </a>`;
         });
       });
