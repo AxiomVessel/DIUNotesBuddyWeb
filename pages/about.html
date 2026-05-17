@@ -13,7 +13,13 @@
     <header class="site-header">
         <div class="container header-inner">
             <a class="brand" href="/">DIU Notes Buddy</a>
-            <button id="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
+            <div style="display:flex;align-items:center;gap:0.5rem">
+                <button class="theme-toggle" id="theme-toggle" aria-pressed="false" title="Toggle color theme">
+                    <span class="icon" id="theme-icon">🌙</span>
+                    <span class="sr-only">Toggle theme</span>
+                </button>
+                <button id="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
+            </div>
             <nav class="site-nav" id="site-nav">
                 <a href="/">Home</a>
                 <a href="/notes/">Notes</a>
@@ -63,10 +69,6 @@
     <footer class="site-footer">
         <div class="container footer-inner">
             <p>&copy; 2026 DIU Notes Buddy</p>
-            <nav class="footer-nav">
-                <a href="/">Home</a>
-                <a href="/pages/about.html">About</a>
-            </nav>
         </div>
     </footer>
 
@@ -78,6 +80,36 @@
             toggle.setAttribute('aria-expanded', String(!expanded));
             nav.classList.toggle('open');
         });
+
+        // Theme toggle: persists preference in localStorage and respects system preference
+        (function(){
+            const root = document.documentElement;
+            const btn = document.getElementById('theme-toggle');
+            const icon = document.getElementById('theme-icon');
+
+            function applyTheme(theme){
+                if(theme === 'dark'){
+                    root.setAttribute('data-theme','dark');
+                    btn.setAttribute('aria-pressed','true');
+                    icon.textContent = '☀️';
+                } else {
+                    root.removeAttribute('data-theme');
+                    btn.setAttribute('aria-pressed','false');
+                    icon.textContent = '🌙';
+                }
+            }
+
+            const saved = localStorage.getItem('site-theme');
+            if(saved) applyTheme(saved);
+            else applyTheme('dark');
+
+            btn.addEventListener('click', ()=>{
+                const isDark = root.getAttribute('data-theme') === 'dark';
+                const next = isDark ? 'light' : 'dark';
+                applyTheme(next);
+                localStorage.setItem('site-theme', next);
+            });
+        })();
     </script>
 
 </body>
