@@ -95,7 +95,7 @@
             nav.classList.toggle('open');
         });
 
-        // Theme toggle: persists preference in localStorage and respects system preference
+        // Theme toggle: persists preference in localStorage with dark themes only
         (function () {
             const root = document.documentElement;
             const btnMobile = document.getElementById('theme-toggle');
@@ -103,20 +103,20 @@
             const icon = document.getElementById('theme-icon');
 
             function getThemeIcon(theme) {
-                if (theme === 'dark') return '☀️';
+                if (theme === 'darker') return '⭐';
                 if (theme === 'soft') return '🌤️';
                 return '🌙';
             }
 
             function applyTheme(theme) {
-                if (theme === 'light') {
-                    root.removeAttribute('data-theme');
-                } else {
+                if (theme === 'darker' || theme === 'soft') {
                     root.setAttribute('data-theme', theme);
+                } else {
+                    root.removeAttribute('data-theme');
                 }
                 
-                if (btnMobile) btnMobile.setAttribute('aria-pressed', theme !== 'light');
-                if (btnDesktop) btnDesktop.setAttribute('aria-pressed', theme !== 'light');
+                if (btnMobile) btnMobile.setAttribute('aria-pressed', theme !== 'darker');
+                if (btnDesktop) btnDesktop.setAttribute('aria-pressed', theme !== 'darker');
                 if (icon) icon.textContent = getThemeIcon(theme);
                 const desktopIcon = document.querySelector('.theme-toggle-desktop .icon');
                 if (desktopIcon) desktopIcon.textContent = getThemeIcon(theme);
@@ -124,17 +124,15 @@
 
             const saved = localStorage.getItem('site-theme');
             if (saved) applyTheme(saved);
-            else applyTheme('light');
+            else applyTheme('darker');
 
             function cycleTheme() {
-                const current = root.getAttribute('data-theme') || 'light';
+                const current = root.getAttribute('data-theme') || 'darker';
                 let next;
-                if (current === 'light') {
-                    next = 'dark';
-                } else if (current === 'dark') {
+                if (current === 'darker') {
                     next = 'soft';
                 } else {
-                    next = 'light';
+                    next = 'darker';
                 }
                 applyTheme(next);
                 localStorage.setItem('site-theme', next);
