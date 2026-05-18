@@ -94,6 +94,7 @@ header {
     border-bottom: 1px solid rgba(65, 208, 255, 0.1);
     backdrop-filter: blur(10px);
     box-shadow: var(--shadow-sm);
+    position: relative;
 }
 
 h1 {
@@ -326,5 +327,101 @@ h1 {
     .file-name {
         font-size: 0.85rem;
         padding: 0 12px 12px;
+    }
+}
+
+/* Extra small screens - hide sidebar and reposition back button */
+@media (max-width: 480px) {
+    body {
+        flex-direction: column;
+    }
+    
+    aside { 
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: auto;
+        height: auto;
+        background: none;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        z-index: 100;
+    }
+    
+    main {
+        flex-grow: 1;
+    }
+    
+    header {
+        padding: 16px 16px 16px 56px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    header h1 {
+        margin: 0;
+        font-size: 1.2rem;
+    }
+    
+    /* Position back button at top-left corner */
+    .nav-item.back {
+        position: fixed;
+        left: 16px;
+        top: 16px;
+        padding: 0;
+        margin: 0;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: auto;
+        height: auto;
+        color: var(--accent-lime);
+        order: -1;
+    }
+    
+    .nav-item.back span::before {
+        content: "← ";
+        font-size: 1.2rem;
+    }
+    
+    .file-grid { 
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        padding: 12px;
+    }
+    
+    .file-card {
+        min-height: 140px;
+    }
+    
+    .card-header {
+        padding: 12px 10px 8px;
+        gap: 6px;
+    }
+    
+    .icon-wrapper {
+        width: 36px;
+        height: 36px;
+        font-size: 1.2rem;
+    }
+    
+    .file-badge {
+        font-size: 0.55rem;
+        padding: 3px 6px;
+    }
+    
+    .file-name {
+        font-size: 0.75rem;
+        padding: 0 10px 8px;
+    }
+    
+    .file-meta {
+        padding: 8px 10px;
+        font-size: 0.7rem;
     }
 }
