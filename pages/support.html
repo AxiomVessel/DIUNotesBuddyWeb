@@ -2,164 +2,145 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Support Us - DIU Notes Buddy</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <meta name="theme-color" content="#2563eb">
-    <link rel="icon" type="image/png" href="../webAssets/favicon.png">
-    <link rel="stylesheet" href="../style.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Support Us - DIU Notes Buddy</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../style.css">
+	<style>
+		.support-grid{display:flex;gap:2rem;align-items:center;justify-content:center;margin-top:1.5rem}
+		.support-grid .card{background:var(--surface);padding:1rem;border-radius:12px;box-shadow:var(--shadow);border:1px solid rgba(0,212,255,0.08);flex:1;display:flex;flex-direction:column;align-items:center}
+		.support-grid img{max-width:360px;width:100%;height:auto;border-radius:8px}
+		.support-grid .caption{color:var(--text-light);margin-top:0.75rem;font-size:0.95rem;text-align:center}
+		@media(max-width:720px){.support-grid{flex-direction:column}.support-grid img{max-width:420px}}
+	</style>
 </head>
 
 <body>
+	<header class="site-header">
+		<div class="container header-inner">
+			<a class="brand" href="/">DIU Notes Buddy</a>
+			<div style="display:flex;align-items:center;gap:0.75rem;margin-left:auto">
+				<button class="theme-toggle theme-toggle-mobile" id="theme-toggle" aria-pressed="false" title="Toggle color theme">
+					<span class="icon" id="theme-icon">🌙</span>
+				</button>
+				<button id="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
+			</div>
+			<nav class="site-nav" id="site-nav">
+				<a href="/">Home</a>
+				<a href="/notes/">Notes</a>
+				<a href="contribute.html">Contribute</a>
+				<a href="support.html" class="active">Support Us</a>
+				<a href="about.html">About</a>
+				<button class="theme-toggle theme-toggle-desktop" id="theme-toggle-desktop" aria-pressed="false" title="Toggle color theme">
+					<span class="icon">🌙</span>
+				</button>
+			</nav>
+		</div>
+	</header>
 
-    <header class="site-header">
-        <div class="container header-inner">
-            <a class="brand" href="/"><img src="../webAssets/favicon.png" alt="DIU Notes Buddy" class="brand-icon-img"><span>DIU Notes Buddy</span></a>
-            <div style="display:flex;align-items:center;gap:0.75rem;margin-left:auto">
-                <button class="theme-toggle theme-toggle-mobile" id="theme-toggle" aria-pressed="false" title="Toggle color theme">
-                    <span class="icon" id="theme-icon">🌙</span>
-                </button>
-                <button id="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
-            </div>
-            <nav class="site-nav" id="site-nav">
-                <a href="/">Home</a>
-                <a href="/notes/">Notes</a>
-                <a href="contribute.html">Contribute</a>
-                <a href="support.html" class="active">Support Us</a>
-                <a href="about.html">About</a>
-                <button class="theme-toggle theme-toggle-desktop" id="theme-toggle-desktop" aria-pressed="false" title="Toggle color theme">
-                    <span class="icon">🌙</span>
-                </button>
-            </nav>
-        </div>
-    </header>
+	<main class="main-content">
+		<section>
+			<div class="hero small-hero">
+				<div class="container">
+					<div class="left">
+						<h1>Support DIU Notes Buddy</h1>
+						<p>If you enjoy the site and want to keep it running, a small donation helps a lot. Scan the bKash QR on the left or enjoy the meme on the right — laughter accepted as currency too.</p>
+					</div>
+				</div>
+			</div>
+		</section>
 
-    <main class="main-content">
-        <section>
-            <div class="hero small-hero">
-                <div class="container">
-                    <div class="left">
-                        <h1>Support Us</h1>
-                        <p>Reach out when a link is broken, a file is missing, or you need help finding the right resource.</p>
-                        <a class="cta" href="mailto:oceanmallik@oceanmallik.com?subject=DIU%20Notes%20Buddy%20Support">Email Support</a>
-                        <a class="cta secondary" href="https://github.com/AxiomVessel/DIUNotesBuddy/issues" style="margin-left:0.75rem">Report an Issue</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+		<section class="container intro">
+			<h2>How to Donate</h2>
+			<p class="lead">Scan the QR on the left with your bKash app, or use the account details provided below. Thank you — every contribution keeps the notes free for everyone.</p>
 
-        <section class="intro container">
-            <h2>How We Can Help</h2>
-            <p>We keep the site simple, so the fastest way to help is to tell us exactly what page, file, or course needs attention.</p>
-        </section>
+			<div class="support-grid">
+				<div class="card">
+					<img src="../webAssets/bkash.jpg" alt="bKash QR code" loading="lazy">
+					<div class="caption">Scan this bKash QR code</div>
+					<div class="caption" style="margin-top:0.25rem;font-weight:700;color:var(--text);">Account: 01326174513</div>
+				</div>
 
-        <section class="features container">
-            <h2>Common Requests</h2>
-            <div class="cards">
-                <article class="note-card">
-                    <div class="card-icon">🔗</div>
-                    <h3>Broken Link</h3>
-                    <p>Tell us which page or file is missing so we can restore the link or point you to the right folder.</p>
-                    <a class="card-btn" href="mailto:oceanmallik@oceanmallik.com?subject=Broken%20Link%20Report">Send Details</a>
-                </article>
-                <article class="note-card">
-                    <div class="card-icon">📁</div>
-                    <h3>Missing Resource</h3>
-                    <p>If you need notes or a sample that is not posted yet, request it and we will review the addition.</p>
-                    <a class="card-btn" href="contribute.html">Request a Resource</a>
-                </article>
-                <article class="note-card">
-                    <div class="card-icon">⚙️</div>
-                    <h3>Site Issue</h3>
-                    <p>Layout problem, navigation bug, or a page that looks wrong? Let us know and we’ll check the markup.</p>
-                    <a class="card-btn" href="https://github.com/AxiomVessel/DIUNotesBuddy/issues">Open Issue</a>
-                </article>
-                <article class="note-card">
-                    <div class="card-icon">⏱️</div>
-                    <h3>Response Time</h3>
-                    <p>We usually review support messages as soon as possible, but the response time depends on course load and file verification.</p>
-                    <a class="card-btn" href="contribute.html">See How to Help</a>
-                </article>
-            </div>
-        </section>
+				<div class="card">
+					<img src="../webAssets/meme.jpg" alt="Funny donation meme" loading="lazy">
+					<div class="caption">A little humor to sweeten the ask.</div>
+				</div>
+			</div>
 
-        <section class="intro container center">
-            <h2>Need the Fastest Route?</h2>
-            <p>Email us with the page name, subject name, and what you expected to find. Clear reports are fixed first.</p>
-            <a class="cta" href="mailto:oceanmallik@oceanmallik.com?subject=DIU%20Notes%20Buddy%20Support">Contact Maintainers</a>
-        </section>
-    </main>
+			<p class="caption" style="margin-top:1rem">Note: Make sure to add 'Donation' on reference field on bKash.</p>
+		</section>
+	</main>
 
-    <footer class="site-footer">
-        <div class="container footer-inner">
-            <nav class="footer-nav" aria-label="Footer navigation">
-                <a href="about.html">About</a>
-                <a href="contribute.html">Contribute</a>
-                <a href="support.html">Support Us</a>
-            </nav>
-            <p>&copy; 2026 Axiom Vessel. All rights reserved.</p>
-        </div>
-    </footer>
+	<footer class="site-footer">
+		<div class="container footer-inner">
+			<p>&copy; 2026 Axiom Vessel. All rights reserved.</p>
+		</div>
+	</footer>
 
-    <script>
-        const toggle = document.getElementById('nav-toggle');
-        const nav = document.getElementById('site-nav');
-        toggle.addEventListener('click', () => {
-            const expanded = toggle.getAttribute('aria-expanded') === 'true';
-            toggle.setAttribute('aria-expanded', String(!expanded));
-            nav.classList.toggle('open');
-        });
+	<script>
+		const toggle = document.getElementById('nav-toggle');
+		const nav = document.getElementById('site-nav');
+		toggle.addEventListener('click', () => {
+			const expanded = toggle.getAttribute('aria-expanded') === 'true';
+			toggle.setAttribute('aria-expanded', String(!expanded));
+			nav.classList.toggle('open');
+		});
 
-        (function () {
-            const root = document.documentElement;
-            const btnMobile = document.getElementById('theme-toggle');
-            const btnDesktop = document.getElementById('theme-toggle-desktop');
-            const icon = document.getElementById('theme-icon');
+		(function () {
+			const root = document.documentElement;
+			const btnMobile = document.getElementById('theme-toggle');
+			const btnDesktop = document.getElementById('theme-toggle-desktop');
+			const icon = document.getElementById('theme-icon');
 
-            function getThemeIcon(theme) {
-                if (theme === 'darker') return '⭐';
-                if (theme === 'soft') return '🌤️';
-                return '🌙';
-            }
+			function getThemeIcon(theme) {
+				if (theme === 'darker') return '⭐';
+				if (theme === 'soft') return '🌤️';
+				return '🌙';
+			}
 
-            function applyTheme(theme) {
-                if (theme === 'darker' || theme === 'soft') {
-                    root.setAttribute('data-theme', theme);
-                } else {
-                    root.removeAttribute('data-theme');
-                }
+			function applyTheme(theme) {
+				if (theme === 'darker' || theme === 'soft') {
+					root.setAttribute('data-theme', theme);
+				} else {
+					root.removeAttribute('data-theme');
+				}
+				if (btnMobile) btnMobile.setAttribute('aria-pressed', theme !== 'darker');
+				if (btnDesktop) btnDesktop.setAttribute('aria-pressed', theme !== 'darker');
+				if (icon) icon.textContent = getThemeIcon(theme);
+				const desktopIcon = document.querySelector('.theme-toggle-desktop .icon');
+				if (desktopIcon) desktopIcon.textContent = getThemeIcon(theme);
+			}
 
-                if (btnMobile) btnMobile.setAttribute('aria-pressed', theme !== 'darker');
-                if (btnDesktop) btnDesktop.setAttribute('aria-pressed', theme !== 'darker');
-                if (icon) icon.textContent = getThemeIcon(theme);
-                const desktopIcon = document.querySelector('.theme-toggle-desktop .icon');
-                if (desktopIcon) desktopIcon.textContent = getThemeIcon(theme);
-            }
+			const saved = localStorage.getItem('site-theme');
+			if (saved) applyTheme(saved);
+			else applyTheme('darker');
 
-            const saved = localStorage.getItem('site-theme');
-            if (saved) applyTheme(saved);
-            else applyTheme('darker');
+			function cycleTheme() {
+				const current = root.getAttribute('data-theme') || 'darker';
+				let next;
+				if (current === 'darker') {
+					next = 'soft';
+				} else {
+					next = 'darker';
+				}
+				applyTheme(next);
+				localStorage.setItem('site-theme', next);
+			}
 
-            function cycleTheme() {
-                const current = root.getAttribute('data-theme') || 'darker';
-                const next = current === 'darker' ? 'soft' : 'darker';
-                applyTheme(next);
-                localStorage.setItem('site-theme', next);
-            }
+			if (btnMobile) {
+				btnMobile.addEventListener('click', cycleTheme);
+			}
 
-            if (btnMobile) {
-                btnMobile.addEventListener('click', cycleTheme);
-            }
-
-            if (btnDesktop) {
-                btnDesktop.addEventListener('click', cycleTheme);
-            }
-        })();
-    </script>
+			if (btnDesktop) {
+				btnDesktop.addEventListener('click', cycleTheme);
+			}
+		})();
+	</script>
 
 </body>
 
 </html>
+
