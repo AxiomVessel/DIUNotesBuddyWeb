@@ -21,10 +21,9 @@
     <header class="site-header">
         <div class="container header-inner">
             <a class="brand" href="/">DIU Notes Buddy</a>
-            <div style="display:flex;align-items:center;gap:0.5rem">
-                <button class="theme-toggle" id="theme-toggle" aria-pressed="false" title="Toggle color theme">
+            <div style="display:flex;align-items:center;gap:0.75rem;margin-left:auto">
+                <button class="theme-toggle theme-toggle-mobile" id="theme-toggle" aria-pressed="false" title="Toggle color theme">
                     <span class="icon" id="theme-icon">🌙</span>
-                    <span class="sr-only">Toggle theme</span>
                 </button>
                 <button id="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
             </div>
@@ -32,21 +31,26 @@
                 <a href="/" class="active">Home</a>
                 <a href="/notes/">Notes</a>
                 <a href="/pages/about.html">About</a>
+                <button class="theme-toggle theme-toggle-desktop" id="theme-toggle-desktop" aria-pressed="false" title="Toggle color theme">
+                    <span class="icon">🌙</span>
+                </button>
             </nav>
         </div>
     </header>
 
-    <main class="container main-content">
+    <main class="main-content">
         <section>
             <div class="hero">
                 <div class="container">
-                    <h1>Notes, Presentations & Past Exams — Organized.</h1>
-                    <p>Free and community-driven study materials for Daffodil International University students.</p>
-                    <a class="cta" href="/notes/">Browse Notes</a>
+                    <div class="left">
+                        <h1>Notes, Presentations & Past Exams — Organized.</h1>
+                        <p>Free and community-driven study materials for Daffodil International University students.</p>
+                        <a class="cta" href="/notes/">Browse Notes</a>
+                    </div>
                 </div>
             </div>
         </section>
-        <section class="features">
+        <section class="features container">
             <h2>Popular Collections</h2>
             <div class="cards">
                 <article class="note-card">
@@ -88,18 +92,25 @@
         // Theme toggle: persists preference in localStorage and respects system preference
         (function () {
             const root = document.documentElement;
-            const btn = document.getElementById('theme-toggle');
+            const btnMobile = document.getElementById('theme-toggle');
+            const btnDesktop = document.getElementById('theme-toggle-desktop');
             const icon = document.getElementById('theme-icon');
 
             function applyTheme(theme) {
                 if (theme === 'dark') {
                     root.setAttribute('data-theme', 'dark');
-                    btn.setAttribute('aria-pressed', 'true');
-                    icon.textContent = '☀️';
+                    if (btnMobile) btnMobile.setAttribute('aria-pressed', 'true');
+                    if (btnDesktop) btnDesktop.setAttribute('aria-pressed', 'true');
+                    if (icon) icon.textContent = '☀️';
+                    const desktopIcon = document.querySelector('.theme-toggle-desktop .icon');
+                    if (desktopIcon) desktopIcon.textContent = '☀️';
                 } else {
                     root.removeAttribute('data-theme');
-                    btn.setAttribute('aria-pressed', 'false');
-                    icon.textContent = '🌙';
+                    if (btnMobile) btnMobile.setAttribute('aria-pressed', 'false');
+                    if (btnDesktop) btnDesktop.setAttribute('aria-pressed', 'false');
+                    if (icon) icon.textContent = '🌙';
+                    const desktopIcon = document.querySelector('.theme-toggle-desktop .icon');
+                    if (desktopIcon) desktopIcon.textContent = '🌙';
                 }
             }
 
@@ -107,12 +118,23 @@
             if (saved) applyTheme(saved);
             else applyTheme('dark');
 
-            btn.addEventListener('click', () => {
-                const isDark = root.getAttribute('data-theme') === 'dark';
-                const next = isDark ? 'light' : 'dark';
-                applyTheme(next);
-                localStorage.setItem('site-theme', next);
-            });
+            if (btnMobile) {
+                btnMobile.addEventListener('click', () => {
+                    const isDark = root.getAttribute('data-theme') === 'dark';
+                    const next = isDark ? 'light' : 'dark';
+                    applyTheme(next);
+                    localStorage.setItem('site-theme', next);
+                });
+            }
+
+            if (btnDesktop) {
+                btnDesktop.addEventListener('click', () => {
+                    const isDark = root.getAttribute('data-theme') === 'dark';
+                    const next = isDark ? 'light' : 'dark';
+                    applyTheme(next);
+                    localStorage.setItem('site-theme', next);
+                });
+            }
         })();
     </script>
 

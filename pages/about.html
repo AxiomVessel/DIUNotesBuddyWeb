@@ -15,10 +15,9 @@
     <header class="site-header">
         <div class="container header-inner">
             <a class="brand" href="/">DIU Notes Buddy</a>
-            <div style="display:flex;align-items:center;gap:0.5rem">
-                <button class="theme-toggle" id="theme-toggle" aria-pressed="false" title="Toggle color theme">
+            <div style="display:flex;align-items:center;gap:0.75rem;margin-left:auto">
+                <button class="theme-toggle theme-toggle-mobile" id="theme-toggle" aria-pressed="false" title="Toggle color theme">
                     <span class="icon" id="theme-icon">🌙</span>
-                    <span class="sr-only">Toggle theme</span>
                 </button>
                 <button id="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
             </div>
@@ -26,51 +25,58 @@
                 <a href="/">Home</a>
                 <a href="/notes/">Notes</a>
                 <a href="about.html" class="active">About</a>
+                <button class="theme-toggle theme-toggle-desktop" id="theme-toggle-desktop" aria-pressed="false" title="Toggle color theme">
+                    <span class="icon">🌙</span>
+                </button>
             </nav>
         </div>
     </header>
 
-    <main class="container main-content">
+    <main class="main-content">
         <section>
             <div class="hero small-hero">
                 <div class="container">
-                    <h1>About DIU Notes Buddy</h1>
-                    <p>Community-driven notes and study resources, organized for easier learning.</p>
+                    <div class="left">
+                        <h1>About DIU Notes Buddy</h1>
+                        <p>Community-driven notes and study resources, organized for easier learning.</p>
+                    </div>
                 </div>
             </div>
         </section>
-        <section class="intro">
+        <section class="intro container">
             <h2>Empowering Knowledge Sharing</h2>
             <p>Our platform is built to help students collaborate and share their study notes effortlessly. Join our
                 growing community today.</p>
         </section>
 
-        <h2>Our Contributors</h2>
-        <div class="contributors-grid">
-            <div class="person">
-                <img class="avatar" src="https://github.com/hasib2050.png" alt="hasib2050 avatar" loading="lazy">
-                <h3><a href="https://github.com/hasib2050">hasib2050</a></h3>
-                <p><strong>Cofounder, Lead Developer</strong></p>
-                <p>"Crafting experiences that make studying delightful."</p>
-                <a class="profile-link" href="https://github.com/hasib2050" aria-label="Visit hasib2050 on GitHub">View
-                    GitHub</a>
+        <section class="container">
+            <h2>Our Contributors</h2>
+            <div class="contributors-grid">
+                <div class="person">
+                    <img class="avatar" src="https://github.com/hasib2050.png" alt="hasib2050 avatar" loading="lazy">
+                    <h3><a href="https://github.com/hasib2050">hasib2050</a></h3>
+                    <p><strong>Cofounder, Lead Developer</strong></p>
+                    <p>"Crafting experiences that make studying delightful."</p>
+                    <a class="profile-link" href="https://github.com/hasib2050" aria-label="Visit hasib2050 on GitHub">View
+                        GitHub</a>
+                </div>
+                <div class="person">
+                    <img class="avatar" src="https://github.com/oceanmallik.png" alt="oceanmallik avatar" loading="lazy">
+                    <h3><a href="https://github.com/oceanmallik">oceanmallik</a></h3>
+                    <p><strong>Cofounder, Developer, Website Manager, GitHub Maintainer</strong></p>
+                    <p>"What Hasib said... Crafting experiences that make studying delightful."</p>
+                    <a class="profile-link" href="https://github.com/oceanmallik"
+                        aria-label="Visit oceanmallik on GitHub">View GitHub</a>
+                </div>
+                <div class="person">
+                    <img class="avatar" src="https://github.com/identicon.png" alt="Contributor avatar" loading="lazy">
+                    <h3>Person X</h3>
+                    <p><strong>Top Contributor</strong></p>
+                    <p>Message 3</p>
+                    <a class="profile-link" href="#">Visit Something</a>
+                </div>
             </div>
-            <div class="person">
-                <img class="avatar" src="https://github.com/oceanmallik.png" alt="oceanmallik avatar" loading="lazy">
-                <h3><a href="https://github.com/oceanmallik">oceanmallik</a></h3>
-                <p><strong>Cofounder, Developer, Website Manager, GitHub Maintainer</strong></p>
-                <p>"What Hasib said... Crafting experiences that make studying delightful."</p>
-                <a class="profile-link" href="https://github.com/oceanmallik"
-                    aria-label="Visit oceanmallik on GitHub">View GitHub</a>
-            </div>
-            <div class="person">
-                <img class="avatar" src="https://github.com/identicon.png" alt="Contributor avatar" loading="lazy">
-                <h3>Person X</h3>
-                <p><strong>Top Contributor</strong></p>
-                <p>Message 3</p>
-                <a class="profile-link" href="#">Visit Something</a>
-            </div>
-        </div>
+        </section>
     </main>
 
     <footer class="site-footer">
@@ -91,18 +97,25 @@
         // Theme toggle: persists preference in localStorage and respects system preference
         (function () {
             const root = document.documentElement;
-            const btn = document.getElementById('theme-toggle');
+            const btnMobile = document.getElementById('theme-toggle');
+            const btnDesktop = document.getElementById('theme-toggle-desktop');
             const icon = document.getElementById('theme-icon');
 
             function applyTheme(theme) {
                 if (theme === 'dark') {
                     root.setAttribute('data-theme', 'dark');
-                    btn.setAttribute('aria-pressed', 'true');
-                    icon.textContent = '☀️';
+                    if (btnMobile) btnMobile.setAttribute('aria-pressed', 'true');
+                    if (btnDesktop) btnDesktop.setAttribute('aria-pressed', 'true');
+                    if (icon) icon.textContent = '☀️';
+                    const desktopIcon = document.querySelector('.theme-toggle-desktop .icon');
+                    if (desktopIcon) desktopIcon.textContent = '☀️';
                 } else {
                     root.removeAttribute('data-theme');
-                    btn.setAttribute('aria-pressed', 'false');
-                    icon.textContent = '🌙';
+                    if (btnMobile) btnMobile.setAttribute('aria-pressed', 'false');
+                    if (btnDesktop) btnDesktop.setAttribute('aria-pressed', 'false');
+                    if (icon) icon.textContent = '🌙';
+                    const desktopIcon = document.querySelector('.theme-toggle-desktop .icon');
+                    if (desktopIcon) desktopIcon.textContent = '🌙';
                 }
             }
 
@@ -110,12 +123,23 @@
             if (saved) applyTheme(saved);
             else applyTheme('dark');
 
-            btn.addEventListener('click', () => {
-                const isDark = root.getAttribute('data-theme') === 'dark';
-                const next = isDark ? 'light' : 'dark';
-                applyTheme(next);
-                localStorage.setItem('site-theme', next);
-            });
+            if (btnMobile) {
+                btnMobile.addEventListener('click', () => {
+                    const isDark = root.getAttribute('data-theme') === 'dark';
+                    const next = isDark ? 'light' : 'dark';
+                    applyTheme(next);
+                    localStorage.setItem('site-theme', next);
+                });
+            }
+
+            if (btnDesktop) {
+                btnDesktop.addEventListener('click', () => {
+                    const isDark = root.getAttribute('data-theme') === 'dark';
+                    const next = isDark ? 'light' : 'dark';
+                    applyTheme(next);
+                    localStorage.setItem('site-theme', next);
+                });
+            }
         })();
     </script>
 
