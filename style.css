@@ -216,19 +216,19 @@ a:focus{outline:3px solid rgba(var(--accent-rgb),0.18);outline-offset:3px;border
 }
 
 :root[data-theme='soft']{
-    --bg:#faf9f6;
-    --bg-start:#ffffff;
-    --surface:#fdfcf9;
-    --muted:#78703f;
-    --text:#4a4540;
-    --text-light:#6b5f55;
-    --accent:#a16207; /* warm brown */
-    --accent-2:#d97706; /* warm amber */
-    --accent-rgb:161,98,7;
-    --accent-2-rgb:217,119,6;
-    --glass:rgba(253,252,249,0.8);
-    --shadow:0 8px 20px rgba(74,63,53,0.08);
-    --shadow-lg:0 15px 40px rgba(74,63,53,0.12);
+    --bg:#f3ede6;
+    --bg-start:#f9f5f0;
+    --surface:#faf6f1;
+    --muted:#8b7a68;
+    --text:#2d2825;
+    --text-light:#5f564d;
+    --accent:#8b5a2b; /* deeper caramel brown */
+    --accent-2:#cd8c3a; /* deeper golden */
+    --accent-rgb:139,90,43;
+    --accent-2-rgb:205,140,58;
+    --glass:rgba(250,246,241,0.85);
+    --shadow:0 8px 20px rgba(45,40,37,0.1);
+    --shadow-lg:0 15px 40px rgba(45,40,37,0.15);
 }
 
 /* Theme toggle button */
