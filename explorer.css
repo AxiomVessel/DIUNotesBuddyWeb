@@ -421,6 +421,7 @@ h1 {
     }
     
     .file-meta {
+        margin-top: auto;
         padding: 8px 10px;
         font-size: 0.7rem;
     }
