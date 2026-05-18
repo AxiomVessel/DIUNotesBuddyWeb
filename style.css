@@ -51,7 +51,7 @@ body{
 .site-nav a.active{background:var(--accent);color:var(--surface)}
 
 /* Hero */
-.hero{padding:2.5rem 0 4.5rem 0;background:linear-gradient(135deg,rgba(var(--accent-rgb),0.04) 0%,rgba(var(--accent-2-rgb),0.02) 100%);position:relative;overflow:hidden}
+.hero{padding:6rem 0 8rem 0;background:linear-gradient(135deg,rgba(var(--accent-rgb),0.04) 0%,rgba(var(--accent-2-rgb),0.02) 100%);position:relative;overflow:hidden}
 .hero::before{
     content:"";
     position:absolute;right:-5%;top:-5%;width:600px;height:600px;
