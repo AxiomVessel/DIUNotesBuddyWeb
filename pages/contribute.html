@@ -4,17 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - DIU Notes Buddy</title>
+    <title>Contribute - DIU Notes Buddy</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#2563eb">
+    <link rel="icon" type="image/png" href="../webAssets/favicon.png">
     <link rel="stylesheet" href="../style.css">
 </head>
 
 <body>
+
     <header class="site-header">
         <div class="container header-inner">
-            <a class="brand" href="/">DIU Notes Buddy</a>
+            <a class="brand" href="/"><img src="../webAssets/favicon.png" alt="DIU Notes Buddy" class="brand-icon-img"><span>DIU Notes Buddy</span></a>
             <div style="display:flex;align-items:center;gap:0.75rem;margin-left:auto">
                 <button class="theme-toggle theme-toggle-mobile" id="theme-toggle" aria-pressed="false" title="Toggle color theme">
                     <span class="icon" id="theme-icon">🌙</span>
@@ -24,9 +27,9 @@
             <nav class="site-nav" id="site-nav">
                 <a href="/">Home</a>
                 <a href="/notes/">Notes</a>
-                <a href="contribute.html">Contribute</a>
-                <a href="support.html">Support Us</a>
-                <a href="about.html" class="active">About</a>
+                <a href="contribute.html" class="active">Contribute</a>
+                <a href="support.html">Support</a>
+                <a href="about.html">About</a>
                 <button class="theme-toggle theme-toggle-desktop" id="theme-toggle-desktop" aria-pressed="false" title="Toggle color theme">
                     <span class="icon">🌙</span>
                 </button>
@@ -39,46 +42,54 @@
             <div class="hero small-hero">
                 <div class="container">
                     <div class="left">
-                        <h1>About DIU Notes Buddy</h1>
-                        <p>Community-driven notes and study resources, organized for easier learning.</p>
+                        <h1>Contribute to DIU Notes Buddy</h1>
+                        <p>Add your notes, fix broken resources, and help make the study library more complete for other DIU students.</p>
+                        <a class="cta" href="mailto:oceanmallik@oceanmallik.com?subject=DIU%20Notes%20Buddy%20Contribution">Send Contribution</a>
+                        <a class="cta secondary" href="support.html" style="margin-left:0.75rem">Need Help?</a>
                     </div>
                 </div>
             </div>
         </section>
+
         <section class="intro container">
-            <h2>Empowering Knowledge Sharing</h2>
-            <p>Our platform is built to help students collaborate and share their study notes effortlessly. Join our
-                growing community today.</p>
+            <h2>What You Can Add</h2>
+            <p>We welcome clean notes, presentation files, lab resources, question banks, and corrections that make the site more useful for everyone.</p>
         </section>
 
-        <section class="container contributors-section">
-            <div class="section-header">
-                <h2>Our Contributors</h2>
-                <p>Meet the talented people behind DIU Notes Buddy</p>
+        <section class="features container">
+            <h2>Contribution Paths</h2>
+            <div class="cards">
+                <article class="note-card">
+                    <div class="card-icon">📝</div>
+                    <h3>Share Notes</h3>
+                    <p>Upload class notes, summaries, or solved examples for any subject that helps students study faster.</p>
+                    <a class="card-btn" href="mailto:oceanmallik@oceanmallik.com?subject=DIU%20Notes%20Buddy%20-%20Share%20Notes">Email Notes</a>
+                </article>
+                <article class="note-card">
+                    <div class="card-icon">🧩</div>
+                    <h3>Improve Existing Pages</h3>
+                    <p>Fix broken links, improve folder structure, or suggest layout improvements for better browsing.</p>
+                    <a class="card-btn" href="https://github.com/AxiomVessel/DIUNotesBuddy/issues">Open an Issue</a>
+                </article>
+                <article class="note-card">
+                    <div class="card-icon">📚</div>
+                    <h3>Add Study Resources</h3>
+                    <p>Presentation files, lab templates, and question banks are all welcome if they help students prepare better.</p>
+                    <a class="card-btn" href="/otherResources/">Browse Resources</a>
+                </article>
+                <article class="note-card">
+                    <div class="card-icon">✅</div>
+                    <h3>Keep It Clean</h3>
+                    <p>Use descriptive names, keep uploads organized by course, and avoid duplicates when possible.</p>
+                    <a class="card-btn" href="support.html">Ask Before Uploading</a>
+                </article>
             </div>
-            <div class="contributors-grid">
-                <div class="person">
-                    <img class="avatar" src="https://github.com/hasib2050.png" alt="hasib2050 avatar" loading="lazy">
-                    <h3><a href="https://github.com/hasib2050">hasib2050</a></h3>
-                    <p class="role"><strong>Co-founder, Lead Developer</strong></p>
-                    <p class="quote">"Crafting experiences that make studying delightful."</p>
-                    <a class="profile-link" href="https://github.com/hasib2050" aria-label="Visit hasib2050 on GitHub">View GitHub</a>
-                </div>
-                <div class="person">
-                    <img class="avatar" src="https://github.com/oceanmallik.png" alt="oceanmallik avatar" loading="lazy">
-                    <h3><a href="https://github.com/oceanmallik">oceanmallik</a></h3>
-                    <p class="role"><strong>Co-founder, Developer, Website & GitHub Maintainer</strong></p>
-                    <p class="quote">"What Hasib said... Crafting experiences that make studying delightful."</p>
-                    <a class="profile-link" href="https://github.com/oceanmallik" aria-label="Visit oceanmallik on GitHub">View GitHub</a>
-                </div>
-                <div class="person">
-                    <img class="avatar" src="https://github.com/mdbinasif07.png" alt="mdbinasif07 avatar" loading="lazy">
-                    <h3><a href="https://github.com/mdbinasif07">mdbinasif07</a></h3>
-                    <p class="role"><strong>Contributor</strong></p>
-                    <p class="quote">"Heroes aren’t remembered for what they take. They’re remembered for what they contribute."</p>
-                    <a class="profile-link" href="https://github.com/mdbinasif07" aria-label="Visit mdbinasif07 on GitHub">View GitHub</a>
-                </div>
-            </div>
+        </section>
+
+        <section class="intro container center">
+            <h2>Ready to Help?</h2>
+            <p>If you have a useful note or resource, send it over and we’ll review it for inclusion.</p>
+            <a class="cta" href="mailto:oceanmallik@oceanmallik.com?subject=DIU%20Notes%20Buddy%20Contribution">Contact Maintainers</a>
         </section>
     </main>
 
@@ -87,7 +98,7 @@
             <nav class="footer-nav" aria-label="Footer navigation">
                 <a href="about.html">About</a>
                 <a href="contribute.html">Contribute</a>
-                <a href="support.html">Support Us</a>
+                <a href="support.html">Support</a>
             </nav>
             <p>&copy; 2026 Axiom Vessel. All rights reserved.</p>
         </div>
@@ -102,7 +113,6 @@
             nav.classList.toggle('open');
         });
 
-        // Theme toggle: persists preference in localStorage with dark themes only
         (function () {
             const root = document.documentElement;
             const btnMobile = document.getElementById('theme-toggle');
@@ -121,7 +131,7 @@
                 } else {
                     root.removeAttribute('data-theme');
                 }
-                
+
                 if (btnMobile) btnMobile.setAttribute('aria-pressed', theme !== 'darker');
                 if (btnDesktop) btnDesktop.setAttribute('aria-pressed', theme !== 'darker');
                 if (icon) icon.textContent = getThemeIcon(theme);
@@ -135,12 +145,7 @@
 
             function cycleTheme() {
                 const current = root.getAttribute('data-theme') || 'darker';
-                let next;
-                if (current === 'darker') {
-                    next = 'soft';
-                } else {
-                    next = 'darker';
-                }
+                const next = current === 'darker' ? 'soft' : 'darker';
                 applyTheme(next);
                 localStorage.setItem('site-theme', next);
             }

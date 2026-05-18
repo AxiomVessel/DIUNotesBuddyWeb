@@ -4,17 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - DIU Notes Buddy</title>
+    <title>Support Us - DIU Notes Buddy</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#2563eb">
+    <link rel="icon" type="image/png" href="../webAssets/favicon.png">
     <link rel="stylesheet" href="../style.css">
 </head>
 
 <body>
+
     <header class="site-header">
         <div class="container header-inner">
-            <a class="brand" href="/">DIU Notes Buddy</a>
+            <a class="brand" href="/"><img src="../webAssets/favicon.png" alt="DIU Notes Buddy" class="brand-icon-img"><span>DIU Notes Buddy</span></a>
             <div style="display:flex;align-items:center;gap:0.75rem;margin-left:auto">
                 <button class="theme-toggle theme-toggle-mobile" id="theme-toggle" aria-pressed="false" title="Toggle color theme">
                     <span class="icon" id="theme-icon">🌙</span>
@@ -25,8 +28,8 @@
                 <a href="/">Home</a>
                 <a href="/notes/">Notes</a>
                 <a href="contribute.html">Contribute</a>
-                <a href="support.html">Support Us</a>
-                <a href="about.html" class="active">About</a>
+                <a href="support.html" class="active">Support Us</a>
+                <a href="about.html">About</a>
                 <button class="theme-toggle theme-toggle-desktop" id="theme-toggle-desktop" aria-pressed="false" title="Toggle color theme">
                     <span class="icon">🌙</span>
                 </button>
@@ -39,46 +42,54 @@
             <div class="hero small-hero">
                 <div class="container">
                     <div class="left">
-                        <h1>About DIU Notes Buddy</h1>
-                        <p>Community-driven notes and study resources, organized for easier learning.</p>
+                        <h1>Support Us</h1>
+                        <p>Reach out when a link is broken, a file is missing, or you need help finding the right resource.</p>
+                        <a class="cta" href="mailto:oceanmallik@oceanmallik.com?subject=DIU%20Notes%20Buddy%20Support">Email Support</a>
+                        <a class="cta secondary" href="https://github.com/AxiomVessel/DIUNotesBuddy/issues" style="margin-left:0.75rem">Report an Issue</a>
                     </div>
                 </div>
             </div>
         </section>
+
         <section class="intro container">
-            <h2>Empowering Knowledge Sharing</h2>
-            <p>Our platform is built to help students collaborate and share their study notes effortlessly. Join our
-                growing community today.</p>
+            <h2>How We Can Help</h2>
+            <p>We keep the site simple, so the fastest way to help is to tell us exactly what page, file, or course needs attention.</p>
         </section>
 
-        <section class="container contributors-section">
-            <div class="section-header">
-                <h2>Our Contributors</h2>
-                <p>Meet the talented people behind DIU Notes Buddy</p>
+        <section class="features container">
+            <h2>Common Requests</h2>
+            <div class="cards">
+                <article class="note-card">
+                    <div class="card-icon">🔗</div>
+                    <h3>Broken Link</h3>
+                    <p>Tell us which page or file is missing so we can restore the link or point you to the right folder.</p>
+                    <a class="card-btn" href="mailto:oceanmallik@oceanmallik.com?subject=Broken%20Link%20Report">Send Details</a>
+                </article>
+                <article class="note-card">
+                    <div class="card-icon">📁</div>
+                    <h3>Missing Resource</h3>
+                    <p>If you need notes or a sample that is not posted yet, request it and we will review the addition.</p>
+                    <a class="card-btn" href="contribute.html">Request a Resource</a>
+                </article>
+                <article class="note-card">
+                    <div class="card-icon">⚙️</div>
+                    <h3>Site Issue</h3>
+                    <p>Layout problem, navigation bug, or a page that looks wrong? Let us know and we’ll check the markup.</p>
+                    <a class="card-btn" href="https://github.com/AxiomVessel/DIUNotesBuddy/issues">Open Issue</a>
+                </article>
+                <article class="note-card">
+                    <div class="card-icon">⏱️</div>
+                    <h3>Response Time</h3>
+                    <p>We usually review support messages as soon as possible, but the response time depends on course load and file verification.</p>
+                    <a class="card-btn" href="contribute.html">See How to Help</a>
+                </article>
             </div>
-            <div class="contributors-grid">
-                <div class="person">
-                    <img class="avatar" src="https://github.com/hasib2050.png" alt="hasib2050 avatar" loading="lazy">
-                    <h3><a href="https://github.com/hasib2050">hasib2050</a></h3>
-                    <p class="role"><strong>Co-founder, Lead Developer</strong></p>
-                    <p class="quote">"Crafting experiences that make studying delightful."</p>
-                    <a class="profile-link" href="https://github.com/hasib2050" aria-label="Visit hasib2050 on GitHub">View GitHub</a>
-                </div>
-                <div class="person">
-                    <img class="avatar" src="https://github.com/oceanmallik.png" alt="oceanmallik avatar" loading="lazy">
-                    <h3><a href="https://github.com/oceanmallik">oceanmallik</a></h3>
-                    <p class="role"><strong>Co-founder, Developer, Website & GitHub Maintainer</strong></p>
-                    <p class="quote">"What Hasib said... Crafting experiences that make studying delightful."</p>
-                    <a class="profile-link" href="https://github.com/oceanmallik" aria-label="Visit oceanmallik on GitHub">View GitHub</a>
-                </div>
-                <div class="person">
-                    <img class="avatar" src="https://github.com/mdbinasif07.png" alt="mdbinasif07 avatar" loading="lazy">
-                    <h3><a href="https://github.com/mdbinasif07">mdbinasif07</a></h3>
-                    <p class="role"><strong>Contributor</strong></p>
-                    <p class="quote">"Heroes aren’t remembered for what they take. They’re remembered for what they contribute."</p>
-                    <a class="profile-link" href="https://github.com/mdbinasif07" aria-label="Visit mdbinasif07 on GitHub">View GitHub</a>
-                </div>
-            </div>
+        </section>
+
+        <section class="intro container center">
+            <h2>Need the Fastest Route?</h2>
+            <p>Email us with the page name, subject name, and what you expected to find. Clear reports are fixed first.</p>
+            <a class="cta" href="mailto:oceanmallik@oceanmallik.com?subject=DIU%20Notes%20Buddy%20Support">Contact Maintainers</a>
         </section>
     </main>
 
@@ -102,7 +113,6 @@
             nav.classList.toggle('open');
         });
 
-        // Theme toggle: persists preference in localStorage with dark themes only
         (function () {
             const root = document.documentElement;
             const btnMobile = document.getElementById('theme-toggle');
@@ -121,7 +131,7 @@
                 } else {
                     root.removeAttribute('data-theme');
                 }
-                
+
                 if (btnMobile) btnMobile.setAttribute('aria-pressed', theme !== 'darker');
                 if (btnDesktop) btnDesktop.setAttribute('aria-pressed', theme !== 'darker');
                 if (icon) icon.textContent = getThemeIcon(theme);
@@ -135,12 +145,7 @@
 
             function cycleTheme() {
                 const current = root.getAttribute('data-theme') || 'darker';
-                let next;
-                if (current === 'darker') {
-                    next = 'soft';
-                } else {
-                    next = 'darker';
-                }
+                const next = current === 'darker' ? 'soft' : 'darker';
                 applyTheme(next);
                 localStorage.setItem('site-theme', next);
             }
