@@ -93,18 +93,25 @@ body{
 .card-btn:hover{transform:scale(1.05);box-shadow:0 12px 28px rgba(var(--accent-rgb),0.25)}
 
 /* Contributors / people */
-.contributors-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-top:1rem}
-.person{background:var(--surface);padding:1.35rem;border-radius:14px;text-align:center;box-shadow:0 12px 32px rgba(2,6,23,0.06);transition:transform .22s ease}
-.person:hover{transform:translateY(-8px)}
-.person h3{color:var(--accent);margin-bottom:0.4rem}
-.person p{color:var(--muted);margin:0}
-.profile-link{display:inline-block;margin-top:0.85rem;padding:8px 14px;background:var(--accent);color:var(--surface);text-decoration:none;border-radius:10px;font-weight:700}
-.profile-link:hover{background:var(--accent-2)}
+.contributors-section{padding:4rem 0}
+.section-header{text-align:center;margin-bottom:3rem}
+.section-header h2{margin:0 0 0.5rem 0;font-size:2rem}
+.section-header p{color:var(--muted);margin:0;font-size:1.1rem}
+.contributors-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-top:2rem}
+.person{background:var(--surface);padding:2rem;border-radius:20px;text-align:center;box-shadow:var(--shadow);border:2px solid transparent;transition:all .22s ease;position:relative;display:flex;flex-direction:column}
+.person:hover{transform:translateY(-10px);box-shadow:0 28px 60px rgba(15,23,36,0.15);border-color:var(--accent-2)}
+.person::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--accent),var(--accent-2));border-radius:20px 20px 0 0}
+.person h3{color:var(--accent);margin:1.5rem 0 0.5rem 0;font-size:1.3rem}
+.person h3 a{color:var(--accent);text-decoration:none;transition:color .18s ease}
+.person h3 a:hover{color:var(--accent-2)}
+.person p{color:var(--muted);margin:0.4rem 0;font-size:0.95rem;line-height:1.5}
+.person .role{font-weight:600;color:var(--text);margin-bottom:0.5rem}
+.person .quote{font-style:italic;color:var(--muted);margin:0.8rem 0 1.2rem 0;flex-grow:1}
+.profile-link{display:inline-block;margin-top:auto;padding:0.8rem 1.5rem;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:var(--surface);text-decoration:none;border-radius:12px;font-weight:700;transition:all .18s ease}
+.profile-link:hover{transform:scale(1.05);box-shadow:0 12px 28px rgba(var(--accent-rgb),0.3)}
 
 /* Avatar in contributor cards */
-.person .avatar{width:96px;height:96px;object-fit:cover;border-radius:50%;display:block;margin:0 auto 0.8rem;border:4px solid rgba(var(--accent-rgb),0.08);box-shadow:0 6px 20px rgba(2,6,23,0.06)}
-.person h3 a{color:var(--accent);text-decoration:none}
-.person h3 a:hover{text-decoration:underline}
+.person .avatar{width:110px;height:110px;object-fit:cover;border-radius:50%;display:block;margin:0 auto;border:5px solid rgba(var(--accent-2-rgb),0.25);box-shadow:0 8px 24px rgba(2,6,23,0.1)}
 
 /* Footer */
 .site-footer{background:transparent;padding:2rem 0;border-top:1px solid rgba(15,23,36,0.04);color:var(--muted);margin-top:auto;text-align:center}
@@ -137,10 +144,10 @@ a:focus{outline:3px solid rgba(var(--accent-rgb),0.18);outline-offset:3px;border
     .main-content{padding:1.75rem 0}
     .container{padding:0 1rem}
     .cards{gap:0.75rem}
-    .contributors-grid{gap:0.75rem}
+    .contributors-grid{gap:1.25rem}
     .note-card{padding:1rem}
-    .person{padding:1rem}
-    .person .avatar{width:80px;height:80px}
+    .person{padding:1.25rem}
+    .person .avatar{width:90px;height:90px;margin-bottom:0.8rem}
     .cta{padding:0.65rem 1rem;font-size:0.95rem}
 }
 @media (max-width:480px){
@@ -159,17 +166,23 @@ a:focus{outline:3px solid rgba(var(--accent-rgb),0.18);outline-offset:3px;border
     .site-nav{right:0.85rem;top:56px;padding:0.5rem}
     .site-nav a{padding:0.4rem 0.6rem;font-size:0.9rem}
     .cards{grid-template-columns:1fr;gap:1rem}
-    .contributors-grid{grid-template-columns:1fr;gap:0.65rem}
+    .contributors-grid{grid-template-columns:1fr;gap:1.5rem}
     .note-card{padding:1.5rem}
     .note-card h3{font-size:1.1rem}
     .note-card p{font-size:0.9rem}
     .card-icon{font-size:2rem}
     .card-btn{font-size:0.9rem;padding:0.65rem 1rem}
-    .person{padding:0.9rem}
-    .person .avatar{width:70px;height:70px;margin-bottom:0.6rem}
-    .person h3{font-size:0.95rem;margin-bottom:0.3rem}
-    .person p{font-size:0.85rem}
-    .profile-link{padding:6px 12px;font-size:0.85rem}
+    .person{padding:1.5rem}
+    .person .avatar{width:85px;height:85px;margin-bottom:0.8rem}
+    .person h3{font-size:1.1rem;margin:1rem 0 0.4rem 0}
+    .person p{font-size:0.9rem}
+    .person .role{font-size:0.9rem}
+    .person .quote{font-size:0.85rem;margin:0.6rem 0 1rem 0}
+    .profile-link{padding:0.7rem 1.2rem;font-size:0.9rem}
+    .section-header{margin-bottom:2rem}
+    .section-header h2{font-size:1.6rem}
+    .section-header p{font-size:1rem}
+    .contributors-section{padding:2.5rem 0}
     .cta{padding:0.6rem 0.9rem;font-size:0.9rem;margin-top:0.75rem}
     .site-footer{padding:1.25rem 0}
     .footer-inner{font-size:0.9rem}
