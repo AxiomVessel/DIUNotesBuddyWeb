@@ -43,7 +43,10 @@ body{
     box-shadow:0 2px 12px rgba(0,0,0,0.04);
 }
 .header-inner{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 0;gap:0.5rem}
-.brand{font-weight:800;color:var(--text);text-decoration:none;font-size:1.35rem;white-space:nowrap;flex-shrink:0;letter-spacing:-0.02em;font-family:'Outfit',sans-serif}
+.brand{font-weight:900;background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none;font-size:1.5rem;white-space:nowrap;flex-shrink:0;letter-spacing:-0.03em;font-family:'Outfit',sans-serif;text-shadow:0 2px 8px rgba(var(--accent-rgb),0.15);display:flex;align-items:center;gap:0.5rem;transition:all 0.3s ease}
+.brand:hover{transform:scale(1.08)}
+.brand-icon-img{width:36px;height:36px;display:inline-block;object-fit:contain;animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0px)}50%{transform:translateY(-4px)}}
 #nav-toggle{display:none;background:transparent;border:0;color:var(--text);font-size:1.3rem}
 .site-nav{display:flex;gap:1rem;align-items:center}
 .site-nav a{color:var(--text-light);text-decoration:none;padding:0.6rem 1rem;border-radius:8px;font-weight:600;font-size:0.95rem;transition:all .2s ease}
