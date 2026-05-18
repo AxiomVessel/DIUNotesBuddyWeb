@@ -54,21 +54,24 @@
             <h2>Popular Collections</h2>
             <div class="cards">
                 <article class="note-card">
+                    <div class="card-icon">📄</div>
                     <h3>Lab Report Sample</h3>
                     <p>A simple template for lab report to get "YOU, yes you!" started. Download the file and make any
                         modifications you need.</p>
-                    <a href="/otherResources/LabResources/LabReportSample.docx">Click Here to Download</a>
+                    <a href="/otherResources/LabResources/LabReportSample.docx" class="card-btn">Click Here to Download</a>
                 </article>
                 <article class="note-card">
+                    <div class="card-icon">⭐</div>
                     <h3>Sample Card</h3>
                     <p>Gacher Pata Sobuj.</p>
-                    <a href="#">Open</a>
+                    <a href="#" class="card-btn">Open</a>
                 </article>
                 <article class="note-card">
+                    <div class="card-icon">🎨</div>
                     <h3>Presentation Sample</h3>
                     <p>A simple template for creating presentations just for you and your team. Download the file and
                         customize it for your needs.</p>
-                    <a href="/otherResources/PresentationResources/PresentationSample.pptx">Click Here to Download</a>
+                    <a href="/otherResources/PresentationResources/PresentationSample.pptx" class="card-btn">Click Here to Download</a>
                 </article>
             </div>
         </section>
@@ -96,44 +99,50 @@
             const btnDesktop = document.getElementById('theme-toggle-desktop');
             const icon = document.getElementById('theme-icon');
 
+            function getThemeIcon(theme) {
+                if (theme === 'dark') return '☀️';
+                if (theme === 'soft') return '🌤️';
+                return '🌙';
+            }
+
             function applyTheme(theme) {
-                if (theme === 'dark') {
-                    root.setAttribute('data-theme', 'dark');
-                    if (btnMobile) btnMobile.setAttribute('aria-pressed', 'true');
-                    if (btnDesktop) btnDesktop.setAttribute('aria-pressed', 'true');
-                    if (icon) icon.textContent = '☀️';
-                    const desktopIcon = document.querySelector('.theme-toggle-desktop .icon');
-                    if (desktopIcon) desktopIcon.textContent = '☀️';
-                } else {
+                if (theme === 'light') {
                     root.removeAttribute('data-theme');
-                    if (btnMobile) btnMobile.setAttribute('aria-pressed', 'false');
-                    if (btnDesktop) btnDesktop.setAttribute('aria-pressed', 'false');
-                    if (icon) icon.textContent = '🌙';
-                    const desktopIcon = document.querySelector('.theme-toggle-desktop .icon');
-                    if (desktopIcon) desktopIcon.textContent = '🌙';
+                } else {
+                    root.setAttribute('data-theme', theme);
                 }
+                
+                if (btnMobile) btnMobile.setAttribute('aria-pressed', theme !== 'light');
+                if (btnDesktop) btnDesktop.setAttribute('aria-pressed', theme !== 'light');
+                if (icon) icon.textContent = getThemeIcon(theme);
+                const desktopIcon = document.querySelector('.theme-toggle-desktop .icon');
+                if (desktopIcon) desktopIcon.textContent = getThemeIcon(theme);
             }
 
             const saved = localStorage.getItem('site-theme');
             if (saved) applyTheme(saved);
-            else applyTheme('dark');
+            else applyTheme('light');
+
+            function cycleTheme() {
+                const current = root.getAttribute('data-theme') || 'light';
+                let next;
+                if (current === 'light') {
+                    next = 'dark';
+                } else if (current === 'dark') {
+                    next = 'soft';
+                } else {
+                    next = 'light';
+                }
+                applyTheme(next);
+                localStorage.setItem('site-theme', next);
+            }
 
             if (btnMobile) {
-                btnMobile.addEventListener('click', () => {
-                    const isDark = root.getAttribute('data-theme') === 'dark';
-                    const next = isDark ? 'light' : 'dark';
-                    applyTheme(next);
-                    localStorage.setItem('site-theme', next);
-                });
+                btnMobile.addEventListener('click', cycleTheme);
             }
 
             if (btnDesktop) {
-                btnDesktop.addEventListener('click', () => {
-                    const isDark = root.getAttribute('data-theme') === 'dark';
-                    const next = isDark ? 'light' : 'dark';
-                    applyTheme(next);
-                    localStorage.setItem('site-theme', next);
-                });
+                btnDesktop.addEventListener('click', cycleTheme);
             }
         })();
     </script>
