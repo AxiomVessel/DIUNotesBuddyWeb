@@ -13,6 +13,9 @@ jobs:
       - name: Run index generator
         run: python3 generate_index.py
 
+      - name: Run HTML updater
+        run: python3 update_html.py
+
       - name: Commit and push files.json updates
         run: |
           git config user.name "github-actions[bot]"
