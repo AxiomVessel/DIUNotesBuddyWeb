@@ -30,6 +30,16 @@ def update_static_cards(content):
         <span class="file-name">{name}</span>'''
     
     content = re.sub(pattern, replace_folder, content)
+    
+    # Pattern for static file cards - clean up any toolbar/download attributes
+    file_pattern = r'<a href="([^"]*\.pdf)"[^>]*(download|#toolbar[^"]*)?[^>]*class="file-card">'
+    
+    def replace_file(match):
+        href = match.group(1)
+        return f'<a href="{href}" class="file-card">'
+    
+    content = re.sub(file_pattern, replace_file, content)
+    
     return content
 
 def update_dynamic_files(content):
@@ -119,7 +129,7 @@ def update_dynamic_files(content):
       .then(res => res.json())
       .then(files => {
         files.forEach(file => {
-          const name = file.replace(/\\.[^\\/]+$/, '');
+          const name = file.replace(/\.[^\/]+$/, '');
           const ext = getFileExtension(file);
           const icon = getFileIcon(ext);
           grid.innerHTML += `
@@ -216,7 +226,7 @@ def process_html_file(filepath):
       .then(res => res.json())
       .then(files => {
         files.forEach(file => {
-          const name = file.replace(/\\.[^\\/]+$/, '');
+          const name = file.replace(/\.[^\/]+$/, '');
           const ext = getFileExtension(file);
           const icon = getFileIcon(ext);
           grid.innerHTML += `
