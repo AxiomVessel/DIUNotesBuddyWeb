@@ -5,23 +5,29 @@ from pathlib import Path
 
 NOTES_DIR = "notes"
 
+def get_folder_icon(folder_name):
+    """Get special icon for specific folders"""
+    special_folders = {
+        'QN': '📜',
+        'Previous Questions': '📜'
+    }
+    return special_folders.get(folder_name, '📁')
+
 def update_static_cards(content):
     """Update static file cards in HTML"""
     # Pattern for static folder cards
-    pattern = r'<a href="([^"]+)" class="file-card">\s*<div class="folder-icon">📂</div>\s*<span class="file-name">([^<]+)</span>\s*</a>'
+    pattern = r'<a href="([^"]+)" class="file-card">\s*<div class="card-header">\s*<div class="icon-wrapper">📁</div>\s*<span class="file-badge badge-folder">Folder</span>\s*</div>\s*<span class="file-name">([^<]+)</span>'
     
     def replace_folder(match):
         href, name = match.groups()
+        folder_name = href.rstrip('/')
+        icon = get_folder_icon(folder_name if folder_name else name)
         return f'''<a href="{href}" class="file-card">
         <div class="card-header">
-          <div class="icon-wrapper">📁</div>
+          <div class="icon-wrapper">{icon}</div>
           <span class="file-badge badge-folder">Folder</span>
         </div>
-        <span class="file-name">{name}</span>
-        <div class="file-meta">
-          <span class="file-type">📂 Directory</span>
-        </div>
-      </a>'''
+        <span class="file-name">{name}</span>'''
     
     content = re.sub(pattern, replace_folder, content)
     return content
@@ -64,6 +70,14 @@ def update_dynamic_files(content):
       return filename.split('.').pop().toLowerCase();
     }
 
+    function getFolderIcon(folderName) {
+      const specialFolders = {
+        'QN': '📜',
+        'Previous Questions': '📜'
+      };
+      return specialFolders[folderName] || '📁';
+    }
+
     function getFileIcon(ext) {
       const icons = {
         'pdf': '📄',
@@ -85,10 +99,11 @@ def update_dynamic_files(content):
       .then(res => res.json())
       .then(folders => {
         folders.forEach(folder => {
+          const folderIcon = getFolderIcon(folder);
           grid.innerHTML += `
             <a href="${folder}/" class="file-card">
               <div class="card-header">
-                <div class="icon-wrapper">📁</div>
+                <div class="icon-wrapper">${folderIcon}</div>
                 <span class="file-badge badge-folder">Folder</span>
               </div>
               <span class="file-name">${folder}</span>
@@ -152,6 +167,14 @@ def process_html_file(filepath):
       return filename.split('.').pop().toLowerCase();
     }
 
+    function getFolderIcon(folderName) {
+      const specialFolders = {
+        'QN': '📜',
+        'Previous Questions': '📜'
+      };
+      return specialFolders[folderName] || '📁';
+    }
+
     function getFileIcon(ext) {
       const icons = {
         'pdf': '📄',
@@ -173,10 +196,11 @@ def process_html_file(filepath):
       .then(res => res.json())
       .then(folders => {
         folders.forEach(folder => {
+          const folderIcon = getFolderIcon(folder);
           grid.innerHTML += `
             <a href="${folder}/" class="file-card">
               <div class="card-header">
-                <div class="icon-wrapper">📁</div>
+                <div class="icon-wrapper">${folderIcon}</div>
                 <span class="file-badge badge-folder">Folder</span>
               </div>
               <span class="file-name">${folder}</span>

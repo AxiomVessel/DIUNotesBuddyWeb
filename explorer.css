@@ -283,10 +283,23 @@ h1 {
     .nav-header, .nav-item span { 
         display: none; 
     }
+    .nav-item.back span {
+        display: inline;
+        font-size: 0;
+    }
+    .nav-item.back span::before {
+        content: "←";
+        font-size: 1.2rem;
+    }
     .nav-item {
         justify-content: center;
         padding: 12px;
         margin: 0 4px;
+    }
+    .nav-item.back {
+        justify-content: center;
+        padding: 12px;
+        margin: 0 4px 16px;
     }
     .file-grid { 
         grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
