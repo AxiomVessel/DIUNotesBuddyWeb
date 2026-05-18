@@ -31,12 +31,12 @@ def update_static_cards(content):
     
     content = re.sub(pattern, replace_folder, content)
     
-    # Pattern for static file cards - clean up any toolbar/download attributes
-    file_pattern = r'<a href="([^"]*\.pdf)"[^>]*(download|#toolbar[^"]*)?[^>]*class="file-card">'
+    # Pattern for static file cards - clean up and add target="_blank" for PDFs
+    file_pattern = r'<a href="([^"]*\.pdf)"[^>]*(download|#toolbar|target[^>]*)?[^>]*class="file-card">'
     
     def replace_file(match):
         href = match.group(1)
-        return f'<a href="{href}" class="file-card">'
+        return f'<a href="{href}" target="_blank" class="file-card">'
     
     content = re.sub(file_pattern, replace_file, content)
     
@@ -132,8 +132,9 @@ def update_dynamic_files(content):
           const name = file.replace(/\.[^\/]+$/, '');
           const ext = getFileExtension(file);
           const icon = getFileIcon(ext);
+          const target = ext === 'pdf' ? 'target="_blank"' : '';
           grid.innerHTML += `
-            <a href="${file}" class="file-card">
+            <a href="${file}" ${target} class="file-card">
               <div class="card-header">
                 <div class="icon-wrapper">${icon}</div>
                 <span class="file-badge badge-file">File</span>
@@ -229,8 +230,9 @@ def process_html_file(filepath):
           const name = file.replace(/\.[^\/]+$/, '');
           const ext = getFileExtension(file);
           const icon = getFileIcon(ext);
+          const target = ext === 'pdf' ? 'target="_blank"' : '';
           grid.innerHTML += `
-            <a href="${file}" class="file-card">
+            <a href="${file}" ${target} class="file-card">
               <div class="card-header">
                 <div class="icon-wrapper">${icon}</div>
                 <span class="file-badge badge-file">File</span>
