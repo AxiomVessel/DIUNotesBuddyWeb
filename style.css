@@ -598,3 +598,31 @@ a:focus{outline:3px solid rgba(var(--accent-rgb),0.18);outline-offset:3px;border
         max-width: 250px;
     }
 }
+
+/* Slide Menu Styles */
+.slide-menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 75%;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+    transition: left 0.3s ease;
+    z-index: 1000;
+}
+
+.slide-menu.open {
+    left: 0;
+}
+
+.close-menu {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+}
