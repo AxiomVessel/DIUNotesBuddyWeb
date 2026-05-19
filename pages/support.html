@@ -15,6 +15,10 @@
 		.support-grid .card{background:var(--surface);padding:1rem;border-radius:12px;box-shadow:var(--shadow);border:1px solid rgba(0,212,255,0.08);flex:1;display:flex;flex-direction:column;align-items:center}
 		.support-grid img{max-width:360px;width:100%;height:auto;border-radius:8px}
 		.support-grid .caption{color:var(--text-light);margin-top:0.75rem;font-size:0.95rem;text-align:center}
+		.copy-phone-btn{margin-top:0.35rem;border:0;background:var(--accent);color:#fff;padding:0.7rem 1rem;border-radius:999px;font-weight:700;cursor:pointer;box-shadow:0 10px 24px rgba(0,212,255,0.18)}
+		.copy-phone-btn:hover{transform:translateY(-1px)}
+		.copy-phone-btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+		.copy-feedback{min-height:1.2em;margin-top:0.4rem;color:var(--text-light);font-size:0.9rem;text-align:center}
 		@media(max-width:720px){.support-grid{flex-direction:column}.support-grid img{max-width:420px}}
 	</style>
 </head>
@@ -62,7 +66,9 @@
 				<div class="card">
 					<img src="../webAssets/bkash.jpg" alt="bKash QR code" loading="lazy">
 					<div class="caption">Scan this bKash QR code</div>
-					<div class="caption" style="margin-top:0.25rem;font-weight:700;color:var(--text);">Account: 01326174513</div>
+					<div class="caption" style="margin-top:0.25rem;font-weight:700;color:var(--text);">Account: <span id="phone-number">01864103655</span></div>
+					<button type="button" class="copy-phone-btn" id="copy-phone-btn" aria-describedby="copy-phone-feedback">Copy phone number</button>
+					<div class="copy-feedback" id="copy-phone-feedback" aria-live="polite"></div>
 				</div>
 
 				<div class="card">
@@ -84,11 +90,38 @@
 	<script>
 		const toggle = document.getElementById('nav-toggle');
 		const nav = document.getElementById('site-nav');
+		const copyPhoneBtn = document.getElementById('copy-phone-btn');
+		const phoneNumber = document.getElementById('phone-number');
+		const copyPhoneFeedback = document.getElementById('copy-phone-feedback');
 		toggle.addEventListener('click', () => {
 			const expanded = toggle.getAttribute('aria-expanded') === 'true';
 			toggle.setAttribute('aria-expanded', String(!expanded));
 			nav.classList.toggle('open');
 		});
+
+		if (copyPhoneBtn && phoneNumber) {
+			copyPhoneBtn.addEventListener('click', async () => {
+				const value = phoneNumber.textContent.trim();
+				try {
+					if (navigator.clipboard && navigator.clipboard.writeText) {
+						await navigator.clipboard.writeText(value);
+					} else {
+						const tempInput = document.createElement('input');
+						tempInput.value = value;
+						tempInput.setAttribute('readonly', 'true');
+						tempInput.style.position = 'absolute';
+						tempInput.style.left = '-9999px';
+						document.body.appendChild(tempInput);
+						tempInput.select();
+						document.execCommand('copy');
+						tempInput.remove();
+					}
+					if (copyPhoneFeedback) copyPhoneFeedback.textContent = 'Phone number copied to clipboard.';
+				} catch (error) {
+					if (copyPhoneFeedback) copyPhoneFeedback.textContent = 'Copy failed. Please select the number manually.';
+				}
+			});
+		}
 
 		(function () {
 			const root = document.documentElement;
