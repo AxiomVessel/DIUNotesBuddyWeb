@@ -47,7 +47,7 @@ The site is live at 👉 **[diunotesbuddy.live](https://diunotesbuddy.live/)**
 
 Want to contribute your notes or improve the site? All help is welcome!
 
-Email us at: oceanmallik@oceanmallik.com
+Fill out this form: https://forms.gle/gVuKTo2LxsfGV9A86
 
 ---
 
