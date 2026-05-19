@@ -130,6 +130,7 @@ h1 {
     overflow: hidden;
     box-shadow: var(--shadow-sm);
     position: relative;
+    justify-content: space-between;
 }
 
 .file-card::before {
@@ -215,6 +216,7 @@ h1 {
     word-break: break-word;
     padding: 0 20px 16px;
     line-height: 1.4;
+    flex-grow: 1;
 }
 
 .file-card:hover .file-name {
