@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - DIU Notes Buddy</title>
+    <title>About — DIU Notes Buddy</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
@@ -37,13 +37,12 @@
     </header>
 
     <main class="main-content">
-        <section>
-            <div class="hero small-hero">
-                <div class="container">
-                    <div class="left">
-                        <h1>About DIU Notes Buddy</h1>
-                        <p>Community-driven notes and study resources, organized for easier learning.</p>
-                    </div>
+        <section class="about-hero">
+            <div class="container">
+                <div>
+                    <h1>We make learning accessible</h1>
+                    <p>DIU Notes Buddy is a community-driven collection of notes, guides, and exam resources curated by students and contributors to help peers learn faster.</p>
+                    <a class="cta" href="contribute.html">Contribute</a>
                 </div>
             </div>
         </section>
@@ -78,7 +77,7 @@
                     <img class="avatar" src="https://github.com/mdbinasif07.png" alt="mdbinasif07 avatar" loading="lazy">
                     <h3><a href="https://github.com/mdbinasif07">mdbinasif07</a></h3>
                     <p class="role"><strong>Notes Contributor</strong></p>
-                    <p class="quote">"Heroes aren’t remembered for what they take. They’re remembered for what they contribute."</p>
+                    <p class="quote">"Heroes aren't remembered for what they take. They're remembered for what they contribute."</p>
                     <div class="person-actions">
                         <a class="profile-link" href="https://github.com/mdbinasif07" aria-label="Visit mdbinasif07 on GitHub">View GitHub</a>
                         <a class="profile-link" href="mailto:mdbinasif@gmail.com" aria-label="Email mdbinasif07">Email</a>
@@ -90,20 +89,21 @@
 
     <footer class="site-footer">
         <div class="container footer-inner">
-            <p>&copy; 2026 Axiom Vessel. All rights reserved.</p>
+            <p>&copy; 2026 DIU Notes Buddy. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
         const toggle = document.getElementById('nav-toggle');
         const nav = document.getElementById('site-nav');
-        toggle.addEventListener('click', () => {
-            const expanded = toggle.getAttribute('aria-expanded') === 'true';
-            toggle.setAttribute('aria-expanded', String(!expanded));
-            nav.classList.toggle('open');
-        });
+        if (toggle && nav) {
+            toggle.addEventListener('click', () => {
+                const expanded = toggle.getAttribute('aria-expanded') === 'true';
+                toggle.setAttribute('aria-expanded', String(!expanded));
+                nav.classList.toggle('open');
+            });
+        }
 
-        // Theme toggle: persists preference in localStorage with dark themes only
         (function () {
             const root = document.documentElement;
             const btnMobile = document.getElementById('theme-toggle');
@@ -123,17 +123,9 @@
                 } else {
                     root.removeAttribute('data-theme');
                 }
-                
                 const iconClass = getThemeIcon(theme);
-                if (btnMobile) btnMobile.setAttribute('aria-pressed', theme !== 'darker');
-                if (btnDesktop) btnDesktop.setAttribute('aria-pressed', theme !== 'darker');
-                
-                if (iconMobile) {
-                    iconMobile.className = 'ti ' + iconClass;
-                }
-                if (iconDesktop) {
-                    iconDesktop.className = 'ti ' + iconClass;
-                }
+                if (iconMobile) iconMobile.className = 'ti ' + iconClass;
+                if (iconDesktop) iconDesktop.className = 'ti ' + iconClass;
             }
 
             const saved = localStorage.getItem('site-theme');
@@ -142,23 +134,13 @@
 
             function cycleTheme() {
                 const current = root.getAttribute('data-theme') || 'darker';
-                let next;
-                if (current === 'darker') {
-                    next = 'soft';
-                } else {
-                    next = 'darker';
-                }
+                const next = current === 'darker' ? 'soft' : 'darker';
                 applyTheme(next);
                 localStorage.setItem('site-theme', next);
             }
 
-            if (btnMobile) {
-                btnMobile.addEventListener('click', cycleTheme);
-            }
-
-            if (btnDesktop) {
-                btnDesktop.addEventListener('click', cycleTheme);
-            }
+            if (btnMobile) btnMobile.addEventListener('click', cycleTheme);
+            if (btnDesktop) btnDesktop.addEventListener('click', cycleTheme);
         })();
     </script>
 

@@ -11,17 +11,6 @@
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 	<link rel="icon" type="image/png" href="../favicon.png">
 	<link rel="stylesheet" href="../style.css">
-	<style>
-		.support-grid{display:flex;gap:2rem;align-items:center;justify-content:center;margin-top:1.5rem}
-		.support-grid .card{background:var(--surface);padding:1rem;border-radius:12px;box-shadow:var(--shadow);border:1px solid rgba(0,212,255,0.08);flex:1;display:flex;flex-direction:column;align-items:center}
-		.support-grid img{max-width:360px;width:100%;height:auto;border-radius:8px}
-		.support-grid .caption{color:var(--text-light);margin-top:0.75rem;font-size:0.95rem;text-align:center}
-		.copy-phone-btn{margin-top:0.35rem;border:0;background:var(--accent);color:#fff;padding:0.7rem 1rem;border-radius:999px;font-weight:700;cursor:pointer;box-shadow:0 10px 24px rgba(0,212,255,0.18)}
-		.copy-phone-btn:hover{transform:translateY(-1px)}
-		.copy-phone-btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-		.copy-feedback{min-height:1.2em;margin-top:0.4rem;color:var(--text-light);font-size:0.9rem;text-align:center}
-		@media(max-width:720px){.support-grid{flex-direction:column}.support-grid img{max-width:420px}}
-	</style>
 </head>
 
 <body>
@@ -48,33 +37,55 @@
 	</header>
 
 	<main class="main-content">
-		<section>
-			<div class="hero small-hero">
-				<div class="container">
-					<div class="left">
-						<h1>Support DIU Notes Buddy</h1>
-						<p>If you enjoy the site and want to keep it running, a small donation helps a lot. Scan the bKash QR on the left or enjoy the meme on the right — laughter accepted as currency too.</p>
-					</div>
+		<section class="support-hero">
+			<div class="container">
+				<div>
+					<h1>Help Us Keep the Lights On</h1>
+					<p>DIU Notes Buddy is free and open for everyone. Your donation keeps our servers running and helps us expand resources for students.</p>
 				</div>
 			</div>
 		</section>
 
-		<section class="container intro">
-			<h2>How to Donate</h2>
-			<p class="lead">Scan the QR on the left with your bKash app, or use the account details provided below. Thank you — every contribution keeps the notes free for everyone.</p>
+		<section class="container" style="padding:2.25rem 0;">
+			<div style="max-width:800px;margin:0 auto;">
+				<h2 style="margin-top:0;text-align:center;">Why Your Support Matters</h2>
+				<p style="text-align:center;color:var(--muted);margin-bottom:2rem;">Every contribution—no matter the size—makes a real difference.</p>
+
+				<div class="benefits-list">
+					<div class="benefit">
+						<i class="ti ti-server"></i>
+						<h4>Reliable Hosting</h4>
+						<p>Keeps our platform fast and available 24/7 for all students.</p>
+					</div>
+					<div class="benefit">
+						<i class="ti ti-book-upload"></i>
+						<h4>New Content</h4>
+						<p>Enables us to add more courses, subjects, and resources.</p>
+					</div>
+					<div class="benefit">
+						<i class="ti ti-users-group"></i>
+						<h4>Community Growth</h4>
+						<p>Supports contributors and builds a stronger learning community.</p>
+					</div>
+				</div>
+			</div>
+
+			<h2 style="text-align:center;margin-top:2.5rem;">Make a Donation</h2>
 
 			<div class="support-grid">
-				<div class="card">
+				<div class="support-card">
+					<h3><i class="ti ti-qrcode" style="color:#22c55e;margin-right:0.5rem;"></i>bKash QR</h3>
 					<img src="../webAssets/bkash.jpg" alt="bKash QR code" loading="lazy">
-					<div class="caption">Scan this bKash QR code, make sure to add your name and ID in reference field.</div>
-					<div class="caption" style="margin-top:0.25rem;font-weight:700;color:var(--text);">Account: <span id="phone-number">01864103655</span></div>
-					<button type="button" class="copy-phone-btn" id="copy-phone-btn" aria-describedby="copy-phone-feedback">Copy phone number</button>
+					<p>Scan with your bKash app.</p>
+					<div class="caption"><strong>Mobile: </strong><span id="phone-number">01864103655</span></div>
+					<p style="font-size:0.85rem;color:var(--muted);">Add your name and student ID in the reference field.</p>
+					<button type="button" class="copy-phone-btn" id="copy-phone-btn" aria-describedby="copy-phone-feedback">Copy Phone Number</button>
 					<div class="copy-feedback" id="copy-phone-feedback" aria-live="polite"></div>
 				</div>
 
-				<div class="card">
+				<div class="support-card">
+					<h3><i class="ti ti-mood-smile" style="color:#22c55e;margin-right:0.5rem;"></i>Spread Smiles</h3>
 					<img src="../webAssets/meme.jpg" alt="Funny donation meme" loading="lazy">
-					<div class="caption">A little humor to sweeten the ask.</div>
 				</div>
 			</div>
 		</section>

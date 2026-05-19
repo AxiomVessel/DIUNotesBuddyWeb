@@ -286,3 +286,64 @@ a:focus{outline:3px solid rgba(var(--accent-rgb),0.18);outline-offset:3px;border
     :root, :root[data-theme='dark'], :root[data-theme='soft']{transition:background-color 250ms ease,color 250ms ease}
     .site-header, .note-card, .person, .site-footer, .cta{transition:all 220ms ease}
 }
+
+/* About page styles */
+.about-hero{padding:4.5rem 0;background:linear-gradient(180deg,rgba(37,99,235,0.08),transparent 60%)}
+.about-hero .container{display:flex;gap:2rem;align-items:center}
+.about-hero h1{margin:0 0 .5rem;font-weight:700;font-size:2rem}
+.about-hero p{margin:0;color:var(--muted)}
+.about-grid{display:grid;grid-template-columns:1fr 320px;gap:2rem;align-items:start}
+.card{background:rgba(255,255,255,0.565);border-radius:12px;padding:1.25rem;box-shadow:0 6px 18px rgba(16,24,40,0.04)}
+.features-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.feature{display:flex;gap:0.75rem;align-items:flex-start}
+.feature .icon{color:#2563eb;font-size:1.5rem;margin-top:3px}
+.feature h4{margin:0;font-size:1rem}
+.feature p{margin:0;color:var(--muted);font-size:0.95rem}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem}
+.team-member{text-align:center;padding:1rem;background:transparent}
+.team-member .avatar{width:84px;height:84px;border-radius:50%;object-fit:cover;display:block;margin:0 auto .65rem}
+.team-member h3{margin:.25rem 0 0;font-size:1rem}
+.team-member p.role{margin:.25rem 0 .5rem;color:var(--muted);font-size:.9rem}
+.cta{display:inline-block;margin-top:1rem;background:#2563eb;color:#fff;padding:.6rem .9rem;border-radius:8px;text-decoration:none}
+
+@media (max-width:900px){
+    .about-grid{grid-template-columns:1fr}
+    .team-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+@media (max-width:520px){
+    .team-grid{grid-template-columns:1fr}
+    .about-hero .container{flex-direction:column;align-items:flex-start}
+}
+
+/* Support page styles */
+.support-hero{padding:4.5rem 0;background:linear-gradient(180deg,rgba(34,197,94,0.08),transparent 60%)}
+.support-hero .container{display:flex;gap:2rem;align-items:center}
+.support-hero h1{margin:0 0 .5rem;font-weight:700;font-size:2rem}
+.support-hero p{margin:0;color:var(--muted)}
+.support-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;margin-top:2rem;align-items:start}
+.support-card{background:var(--surface);border-radius:12px;padding:1.5rem;box-shadow:var(--shadow);border:1px solid rgba(34,197,94,0.12);display:flex;flex-direction:column}
+.support-card h3{margin:0 0 0.75rem;font-weight:700;font-size:1.15rem}
+.support-card p{margin:0 0 1rem;color:var(--muted);flex-grow:1;line-height:1.6}
+.support-card img{width:100%;height:auto;border-radius:8px;margin:0 0 1rem 0;max-width:100%;display:block;max-height:240px;object-fit:contain}
+.support-card:nth-child(2) img{min-height:400px;object-fit:cover;max-height:none}
+.support-card .caption{color:var(--muted);margin:0.5rem 0;font-size:0.95rem}
+.copy-phone-btn{margin-top:0.75rem;border:0;background:#22c55e;color:#fff;padding:0.65rem 1rem;border-radius:8px;font-weight:600;cursor:pointer;box-shadow:0 4px 12px rgba(34,197,94,0.25);transition:all .2s ease}
+.copy-phone-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(34,197,94,0.4)}
+.copy-phone-btn:focus-visible{outline:2px solid #22c55e;outline-offset:3px}
+.copy-feedback{min-height:1.2em;margin-top:0.4rem;color:var(--text-light);font-size:0.9rem}
+.benefits-list{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin:2rem 0}
+.benefit{background:var(--surface);border-radius:12px;padding:1.25rem;text-align:center;border:1px solid rgba(34,197,94,0.12)}
+.benefit i{font-size:2rem;color:#22c55e;display:block;margin-bottom:0.75rem}
+.benefit h4{margin:0.5rem 0;font-size:1rem;font-weight:600;color:var(--text)}
+.benefit p{margin:0;color:var(--muted);font-size:0.95rem}
+
+@media (max-width:900px){
+    .support-grid{grid-template-columns:1fr}
+    .benefits-list{grid-template-columns:repeat(2,1fr)}
+}
+
+@media (max-width:520px){
+    .support-hero .container{flex-direction:column;align-items:flex-start}
+    .benefits-list{grid-template-columns:1fr}
+}
