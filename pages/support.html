@@ -7,6 +7,7 @@
 	<title>Support Us - DIU Notes Buddy</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 	<link rel="icon" type="image/png" href="../favicon.png">
 	<link rel="stylesheet" href="../style.css">
@@ -29,18 +30,18 @@
 			<a class="brand" href="/"><img src="../favicon.png" alt="DIU Notes Buddy" class="brand-icon-img"><span>DIU Notes Buddy</span></a>
 			<div style="display:flex;align-items:center;gap:0.75rem;margin-left:auto">
 				<button class="theme-toggle theme-toggle-mobile" id="theme-toggle" aria-pressed="false" title="Toggle color theme">
-					<span class="icon" id="theme-icon">🌙</span>
-				</button>
-				<button id="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
-			</div>
-			<nav class="site-nav" id="site-nav">
-				<a href="/">Home</a>
-				<a href="/notes/">Notes</a>
-				<a href="contribute.html">Contribute</a>
-				<a href="support.html" class="active">Support Us</a>
-				<a href="about.html">About</a>
-				<button class="theme-toggle theme-toggle-desktop" id="theme-toggle-desktop" aria-pressed="false" title="Toggle color theme">
-					<span class="icon">🌙</span>
+				<i class="ti ti-moon" id="theme-icon"></i>
+			</button>
+			<button id="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
+		</div>
+		<nav class="site-nav" id="site-nav">
+			<a href="/">Home</a>
+			<a href="/notes/">Notes</a>
+			<a href="contribute.html">Contribute</a>
+			<a href="support.html" class="active">Support Us</a>
+			<a href="about.html">About</a>
+			<button class="theme-toggle theme-toggle-desktop" id="theme-toggle-desktop" aria-pressed="false" title="Toggle color theme">
+				<i class="ti ti-moon" id="theme-icon-desktop"></i>
 				</button>
 			</nav>
 		</div>
@@ -125,12 +126,13 @@
 			const root = document.documentElement;
 			const btnMobile = document.getElementById('theme-toggle');
 			const btnDesktop = document.getElementById('theme-toggle-desktop');
-			const icon = document.getElementById('theme-icon');
+			const iconMobile = document.getElementById('theme-icon');
+			const iconDesktop = document.getElementById('theme-icon-desktop');
 
 			function getThemeIcon(theme) {
-				if (theme === 'darker') return '⭐';
-				if (theme === 'soft') return '🌤️';
-				return '🌙';
+				if (theme === 'darker') return 'ti-moon-stars';
+				if (theme === 'soft') return 'ti-sun';
+				return 'ti-moon';
 			}
 
 			function applyTheme(theme) {
@@ -139,11 +141,16 @@
 				} else {
 					root.removeAttribute('data-theme');
 				}
+				const iconClass = getThemeIcon(theme);
 				if (btnMobile) btnMobile.setAttribute('aria-pressed', theme !== 'darker');
 				if (btnDesktop) btnDesktop.setAttribute('aria-pressed', theme !== 'darker');
-				if (icon) icon.textContent = getThemeIcon(theme);
-				const desktopIcon = document.querySelector('.theme-toggle-desktop .icon');
-				if (desktopIcon) desktopIcon.textContent = getThemeIcon(theme);
+				
+				if (iconMobile) {
+					iconMobile.className = 'ti ' + iconClass;
+				}
+				if (iconDesktop) {
+					iconDesktop.className = 'ti ' + iconClass;
+				}
 			}
 
 			const saved = localStorage.getItem('site-theme');
