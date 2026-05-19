@@ -73,14 +73,16 @@
 			<h2 style="text-align:center;margin-top:2.5rem;">Make a Donation</h2>
 
 			<div class="support-grid">
-				<div class="support-card">
-					<h3><i class="ti ti-qrcode" style="color:#22c55e;margin-right:0.5rem;"></i>bKash QR</h3>
-					<img src="../webAssets/bkash.jpg" alt="bKash QR code" loading="lazy">
-					<p>Scan with your bKash app.</p>
-					<div class="caption"><strong>Mobile: </strong><span id="phone-number">01864103655</span></div>
-					<p style="font-size:0.85rem;color:var(--muted);">Add your name and student ID in the reference field.</p>
-					<button type="button" class="copy-phone-btn" id="copy-phone-btn" aria-describedby="copy-phone-feedback">Copy Phone Number</button>
-					<div class="copy-feedback" id="copy-phone-feedback" aria-live="polite"></div>
+				<div class="support-card support-card-qr">
+					<img src="../webAssets/bkash.jpg" alt="bKash QR code" loading="lazy" class="qr-image">
+					<div class="qr-content">
+						<h3><i class="ti ti-qrcode" style="color:#22c55e;margin-right:0.5rem;"></i>bKash QR</h3>
+						<p>Scan with your bKash app.</p>
+						<div class="caption"><strong>Mobile: </strong><span id="phone-number">01864103655</span></div>
+						<p style="font-size:0.85rem;color:var(--muted);">Add your name and student ID in the reference field.</p>
+						<button type="button" class="copy-phone-btn" id="copy-phone-btn" aria-describedby="copy-phone-feedback">Copy Phone Number</button>
+						<div class="copy-feedback" id="copy-phone-feedback" aria-live="polite"></div>
+					</div>
 				</div>
 
 				<div class="support-card">
