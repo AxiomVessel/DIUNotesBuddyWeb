@@ -109,6 +109,7 @@ body{
 .note-card{background:var(--surface);padding:1.25rem;border-radius:12px;box-shadow:var(--shadow);border:1px solid rgba(0,212,255,0.12);transition:all .25s ease;position:relative;display:flex;flex-direction:column}
 .note-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:rgba(var(--accent-rgb),0.16)}
 .note-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--accent),var(--accent-2));border-radius:12px 12px 0 0}
+.contribution-section .note-card{min-height:320px}
 .card-icon{font-size:1.8rem;margin-bottom:0.75rem;display:flex;align-items:center;justify-content:center;width:56px;height:56px;background:linear-gradient(135deg,rgba(var(--accent-rgb),0.06),rgba(var(--accent-2-rgb),0.04));border-radius:10px;margin-left:auto;margin-right:auto;border:1px solid rgba(var(--accent-rgb),0.12)}
 .note-card h3{margin:0 0 0.5rem 0;font-size:1.15rem;color:var(--text);font-weight:700;font-family:'Outfit',sans-serif}
 .note-card p{color:var(--text-light);margin:0 0 1rem 0;flex-grow:1;line-height:1.6;font-size:0.92rem}
@@ -120,7 +121,7 @@ body{
 
 /* Tabler icons in note cards */
 .note-card i.ti{
-    font-size:2.5rem;
+    font-size:3.4rem;
     color:var(--accent);
     margin-bottom:1.5rem;
     display:block;
