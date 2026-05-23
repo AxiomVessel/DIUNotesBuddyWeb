@@ -61,9 +61,9 @@ Built with ❤️ by the [Axiom Vessel](https://github.com/AxiomVessel) team.
 
 ---
 
-## 📄 License
-
-This project is open-source. Feel free to use, share, and contribute.
+## License
+- **Code** (HTML, CSS, Python): [MIT License](LICENSE)
+- **Notes & Content**: [Creative Commons BY 4.0](LICENSE-CONTENT)
 
 ---
 
