@@ -45,7 +45,7 @@ The site is live at 👉 **[diunotesbuddy.live](https://diunotesbuddy.live/)**
 
 ## 🤝 Contributing
 
-Want to contribute your notes or improve the site? All help is welcome!
+Want to contribute your notes or improve the site? All help is welcome! Hit us up. 
 
 Fill out this form: https://forms.gle/gVuKTo2LxsfGV9A86
 
