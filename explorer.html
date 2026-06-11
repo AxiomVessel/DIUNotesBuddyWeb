@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explorer</title>
+  <link rel="stylesheet" href="../explorer.css">
+</head>
+
+<body>
+
+  <aside>
+    <div class="nav-header">Explorer</div>
+    <a href="/" class="nav-item back" id="back-button">
+      <span>← Go Back</span>
+    </a>
+  </aside>
+
+  <main>
+    <header>
+      <h1 id="header-title">Loading...</h1>
+    </header>
+
+    <section class="file-grid" id="file-grid">
+      </section>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const MANIFEST_URL = 'https://raw.githubusercontent.com/oceanmallik/DIUNotesBuddyDATABASE/main/manifest.json';
+      
+      const grid = document.getElementById('file-grid');
+      const headerTitle = document.getElementById('header-title');
+      const backButton = document.getElementById('back-button');
+      
+      async function initializeExplorer() {
+        try {
+          const response = await fetch(MANIFEST_URL);
+          if (!response.ok) throw new Error('Failed to connect to the database.');
+          const data = await response.json();
+          renderCurrentView(data);
+        } catch (error) {
+          grid.innerHTML = `<div style="grid-column: 1 / -1; color: #FF5252; text-align: center; padding: 40px;">Connection Error: ${error.message}</div>`;
+          headerTitle.textContent = "Error";
+        }
+      }
+
+      function renderCurrentView(data) {
+        // 1. Grab all parameters from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const deptId = urlParams.get('dept');
+        const yearId = urlParams.get('year');
+        const semId = urlParams.get('sem');
+        const subjectId = urlParams.get('subject');
+        const categoryId = urlParams.get('category');
+        const topicId = urlParams.get('topic');
+
+        let currentTitle = "Explorer";
+        let backLink = "/";
+        let htmlContent = "";
+
+        // 2. Fast & Safe Tree Traversal (Find exactly where the user is in the database)
+        let d = null, y = null, s = null, sub = null;
+        if (deptId && data.departments) d = data.departments.find(x => x.id === deptId);
+        if (d && yearId) y = d.years.find(x => x.id === yearId);
+        if (y && semId) s = y.semesters.find(x => x.id === semId);
+        if (s && subjectId) sub = s.subjects.find(x => x.id === subjectId);
+
+        // 3. Render the correct UI based on how deep the user clicked
+        if (sub && categoryId && topicId) {
+          // LEVEL 6: Display Files inside a specific Topic
+          currentTitle = topicId;
+          backLink = `?dept=${deptId}&year=${yearId}&sem=${semId}&subject=${subjectId}&category=${categoryId}`;
+          
+          const topicsArray = sub.materials[categoryId] || [];
+          const topicData = topicsArray.find(t => t.topic === topicId);
+          
+          if (topicData && topicData.files && topicData.files.length > 0) {
+            topicData.files.forEach(f => {
+              htmlContent += createFileCard(f.filename, f.url);
+            });
+          } else {
+            htmlContent = `<div style="grid-column: 1 / -1; color: var(--muted); padding: 40px;">No files found in this topic.</div>`;
+          }
+
+        } else if (sub && categoryId) {
+          // LEVEL 5: Display Topic Folders inside a Category (Midterm/Final)
+          currentTitle = categoryId.charAt(0).toUpperCase() + categoryId.slice(1); // Capitalizes the category name
+          backLink = `?dept=${deptId}&year=${yearId}&sem=${semId}&subject=${subjectId}`;
+          
+          const topicsArray = sub.materials[categoryId] || [];
+          if (topicsArray.length > 0) {
+            topicsArray.forEach(t => {
+              // encodeURIComponent ensures spaces in topic names don't break the URL
+              const nextUrl = `?dept=${deptId}&year=${yearId}&sem=${semId}&subject=${subjectId}&category=${categoryId}&topic=${encodeURIComponent(t.topic)}`;
+              htmlContent += createFolderCard(t.topic, nextUrl);
+            });
+          } else {
+            htmlContent = `<div style="grid-column: 1 / -1; color: var(--muted); padding: 40px;">No topics found in this category.</div>`;
+          }
+
+        } else if (sub) {
+          // LEVEL 4: Display Category Folders (Midterm, Final) inside a Subject
+          currentTitle = sub.title;
+          backLink = `?dept=${deptId}&year=${yearId}&sem=${semId}`;
+          let hasCategories = false;
+          
+          Object.entries(sub.materials).forEach(([catName, topicsArray]) => {
+            if (topicsArray && topicsArray.length > 0) {
+              hasCategories = true;
+              const nextUrl = `?dept=${deptId}&year=${yearId}&sem=${semId}&subject=${subjectId}&category=${catName}`;
+              htmlContent += createFolderCard(catName.charAt(0).toUpperCase() + catName.slice(1), nextUrl);
+            }
+          });
+          
+          if (!hasCategories) {
+            htmlContent = `<div style="grid-column: 1 / -1; color: var(--muted); padding: 40px;">No materials uploaded for this subject yet.</div>`;
+          }
+
+        } else if (s) {
+          // LEVEL 3: Display Subject Folders inside a Semester
+          currentTitle = s.label;
+          backLink = `?dept=${deptId}&year=${yearId}`;
+          s.subjects.forEach(subItem => {
+            const nextUrl = `?dept=${deptId}&year=${yearId}&sem=${semId}&subject=${subItem.id}`;
+            htmlContent += createFolderCard(subItem.title, nextUrl);
+          });
+
+        } else if (y) {
+          // LEVEL 2: Display Semester Folders inside a Year
+          currentTitle = y.label;
+          backLink = `?dept=${deptId}`;
+          y.semesters.forEach(semItem => {
+            const nextUrl = `?dept=${deptId}&year=${yearId}&sem=${semItem.id}`;
+            htmlContent += createFolderCard(semItem.label, nextUrl);
+          });
+
+        } else if (d) {
+          // LEVEL 1: Display Year Folders inside a Department
+          currentTitle = d.title;
+          backLink = "?";
+          d.years.forEach(yearItem => {
+            const nextUrl = `?dept=${deptId}&year=${yearItem.id}`;
+            htmlContent += createFolderCard(yearItem.label, nextUrl);
+          });
+
+        } else {
+          // LEVEL 0: Root - Display Department Folders
+          currentTitle = "Select Department";
+          backLink = "/"; // Modify this if your website homepage is a different URL
+          if (data.departments) {
+            data.departments.forEach(deptItem => {
+              htmlContent += createFolderCard(deptItem.title, `?dept=${deptItem.id}`);
+            });
+          }
+        }
+
+        // 4. Paint the UI
+        document.title = `${currentTitle} | Explorer`;
+        headerTitle.textContent = currentTitle;
+        backButton.href = backLink;
+        grid.innerHTML = htmlContent;
+      }
+
+      function createFolderCard(title, href) {
+        return `
+        <a href="${href}" class="file-card">
+          <div class="card-header">
+            <div class="icon-wrapper">📁</div>
+            <span class="file-badge badge-folder">Folder</span>
+          </div>
+          <span class="file-name">${title}</span>
+          <div class="file-meta">
+            <span class="file-type">📂 Directory</span>
+          </div>
+        </a>`;
+      }
+
+      function createFileCard(title, url) {
+        return `
+        <a href="${url}" target="_blank" rel="noopener noreferrer" class="file-card">
+          <div class="card-header">
+            <div class="icon-wrapper">📄</div>
+            <span class="file-badge badge-file">File</span>
+          </div>
+          <span class="file-name">${title}</span>
+          <div class="file-meta">
+            <span class="file-type">📄 PDF Document</span>
+          </div>
+        </a>`;
+      }
+
+      initializeExplorer();
+    });
+  </script>
+
+</body>
+</html>
