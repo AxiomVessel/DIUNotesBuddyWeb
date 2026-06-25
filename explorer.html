@@ -297,6 +297,10 @@
         if (fileExt === 'pdf') {
           iconClass = 'ti-file-pdf';
           badgeText = 'PDF';
+          if (url.startsWith('https://raw.githubusercontent.com/')) {
+            url = url.replace('https://raw.githubusercontent.com/', 'https://cdn.jsdelivr.net/gh/');
+            url = url.replace('/main/', '@main/');
+          }
         } else if (['docx', 'doc'].includes(fileExt)) {
           iconClass = 'ti-file-word';
           badgeText = 'Word';
