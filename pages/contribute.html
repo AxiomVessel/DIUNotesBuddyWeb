@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contribute - DIU Notes</title>
+    <title>Contribute | DIU Notes Buddy</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <meta name="theme-color" content="#2563eb">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#3b82f6">
     <link rel="icon" type="image/png" href="../favicon.png">
     <link rel="stylesheet" href="../style.css">
 </head>
@@ -18,7 +18,10 @@
 
     <header class="site-header">
         <div class="container header-inner">
-            <a class="brand" href="/"><img src="../favicon.png" alt="DIU Notes Buddy" class="brand-icon-img"><span>DIU Notes Buddy</span></a>
+            <a class="brand" href="/">
+                <img src="../favicon.png" alt="DIU Notes Buddy Logo" class="brand-icon-img">
+                <span>DIU Notes Buddy</span>
+            </a>
             <div style="display:flex;align-items:center;gap:0.75rem;margin-left:auto">
                 <button class="theme-toggle theme-toggle-mobile" id="theme-toggle" aria-pressed="false" title="Toggle color theme">
                     <i class="ti ti-moon" id="theme-icon"></i>
@@ -39,74 +42,103 @@
     </header>
 
     <main class="main-content">
-        <section class="about-hero contribute-hero">
+        <section class="contribute-hero">
             <div class="container">
                 <div>
                     <h1>Contribute to DIU Notes Buddy</h1>
-                    <p>Add your notes, fix broken resources, and help make the study library more complete for other DIU students. Scan the QR to download. </p>
-                    <a class="cta" href="https://play.google.com/store/apps/details?id=com.oceanmallik.diunote" target="_blank" rel="noopener noreferrer"><i class="ti ti-send"></i> Submit Contribution with Our Mobile App</a>
-                    <a class="cta secondary" href="https://github.com/AxiomVessel/DIUNotesBuddy/issues" style="margin-left:0.75rem" target="_blank" rel="noopener noreferrer"><i class="ti ti-alert-circle"></i> Report an Issue</a>
+                    <p>Add your study materials, fix broken resources, and help make our lecture directory more complete for other Daffodil students. You can scan the QR code to install our mobile contribution app.</p>
+                    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.5rem;">
+                        <a class="cta" href="https://play.google.com/store/apps/details?id=com.oceanmallik.diunote" target="_blank" rel="noopener noreferrer">
+                            <i class="ti ti-brand-google-play"></i> Get Mobile App
+                        </a>
+                        <a class="cta secondary" href="https://github.com/AxiomVessel/DIUNotesBuddyWeb/issues" target="_blank" rel="noopener noreferrer">
+                            <i class="ti ti-alert-circle"></i> Report an Issue
+                        </a>
+                    </div>
                 </div>
                 <div class="qr-wrapper">
-                    <div class="qr-card">
-                        <img src="../webAssets/appQR.png" alt="App QR Code" class="qr-code">
+                    <div class="qr-card" title="Scan to download Android App">
+                        <img src="../webAssets/appQR.png" alt="App Download QR Code" class="qr-code">
                     </div>
                 </div>
             </div>
         </section>
 
         <section class="intro container">
-            <h2>What Can You Add and What Will You Get? </h2>
-            <p>We welcome clean notes, presentation files, lab resources, question banks and corrections that make the site more useful for everyone.</p>
-            <p>We have a contribution leaderboard that recognizes the most active contributors and their valuable additions to the site.</p>
+            <h2>What Can You Add?</h2>
+            <p>We welcome clean lecture notes, presentation slide samples, lab experiment reports, previous semester question banks, and corrections that keep the content accurate.</p>
+            <p>Our project features a contribution catalog that credits and appreciates active student contributors who upload resources.</p>
         </section>
 
-        <section class="features container contribution-section">
-            <h2>Contribution Paths</h2>
+        <section class="features container">
+            <h2 class="section-title"><i class="ti ti-git-branch"></i> Contribution Paths</h2>
             <div class="cards">
                 <article class="note-card">
-                    <i class="ti ti-message-circle"></i>
-                    <h3>Write us feedbacks</h3>
-                    <p>Write us feedback about your experience using the site or suggestions for improvement.</p>
-                    <a class="card-btn" href="mailto:diunotes@gmail.com?subject=DIU%20Notes%20Buddy%20-%20Share%20Notes">Email Us</a>
+                    <i class="ti ti-mail"></i>
+                    <h3>Send us Notes</h3>
+                    <p>Got notes or questions ready? Simply write us an email with the files attached, stating the department and semester details.</p>
+                    <a class="card-btn" href="mailto:diunotes@gmail.com?subject=DIU%20Notes%20Buddy%20-%20Share%20Notes"><i class="ti ti-mail-forward"></i> Email Files</a>
                 </article>
                 <article class="note-card">
-                    <i class="ti ti-puzzle"></i>
-                    <h3>Improve Existing Pages</h3>
-                    <p>Fix broken links, improve folder structure, or suggest layout improvements for better browsing.</p>
-                    <a class="card-btn" href="https://github.com/AxiomVessel/DIUNotesBuddy/issues">Open an Issue</a>
+                    <i class="ti ti-brand-github"></i>
+                    <h3>Improve Site Code</h3>
+                    <p>Our website is open-source. Help correct structural typos, file paths, visual styling, or submit suggestions directly on GitHub.</p>
+                    <a class="card-btn" href="https://github.com/AxiomVessel/DIUNotesBuddyWeb/issues" target="_blank" rel="noopener noreferrer"><i class="ti ti-git-pull-request"></i> Open Issue</a>
                 </article>
                 <article class="note-card">
-                    <i class="ti ti-books"></i>
+                    <i class="ti ti-folder-open"></i>
                     <h3>Add Study Resources</h3>
-                    <p>Presentation files, lab templates, and question banks are all welcome if they help students prepare better.</p>
-                    <a class="card-btn" href="/notes/">Browse Resources</a>
+                    <p>Have custom slides, lab experiments templates, or solutions? Check out the folders in our notes explorer to see what needs updates.</p>
+                    <a class="card-btn" href="/explorer.html">Browse Explorer <i class="ti ti-arrow-right"></i></a>
                 </article>
             </div>
         </section>
 
         <section class="intro container center">
-            <h2>Need assistence? </h2>
-            <p>Contact website maintainers for help with contributions or any other questions.</p>
-            <a class="cta" href="mailto:oceanmallik@oceanmallik.com,hasibulhasanhasib355@gmail.com?subject=DIU%20Notes%20Buddy%20Help" target="_blank" rel="noopener noreferrer">Mail @oceanmallik & @hasib2050</a>
+            <h2>Need Technical Assistance?</h2>
+            <p>Feel free to reach out to the project co-founders if you need help uploading large course materials or organizing folder routes.</p>
+            <a class="cta" href="mailto:oceanmallik@oceanmallik.com,hasibulhasanhasib355@gmail.com?subject=DIU%20Notes%20Buddy%20Help" target="_blank" rel="noopener noreferrer">
+                <i class="ti ti-mail-opened"></i> Contact Maintainers
+            </a>
         </section>
     </main>
 
     <footer class="site-footer">
         <div class="container footer-inner">
-            <p>&copy; 2026 Axiom Vessel. All rights reserved.</p>
+            <p>&copy; 2026 DIU Notes Buddy. Developed by Axiom Vessel. All rights reserved.</p>
         </div>
     </footer>
 
-    <script>
-        const toggle = document.getElementById('nav-toggle');
-        const nav = document.getElementById('site-nav');
-        toggle.addEventListener('click', () => {
-            const expanded = toggle.getAttribute('aria-expanded') === 'true';
-            toggle.setAttribute('aria-expanded', String(!expanded));
-            nav.classList.toggle('open');
-        });
+    <!-- Slide drawer menu for mobile navigation -->
+    <div id="slide-menu" class="slide-menu">
+        <button id="close-menu" class="close-menu" aria-label="Close menu">&times;</button>
+        <nav>
+            <a href="/"><i class="ti ti-home"></i> Home</a>
+            <a href="/explorer.html"><i class="ti ti-book"></i> Notes</a>
+            <a href="contribute.html" class="active"><i class="ti ti-hand-stop"></i> Contribute</a>
+            <a href="support.html"><i class="ti ti-help"></i> Support Us</a>
+            <a href="about.html"><i class="ti ti-info-circle"></i> About</a>
+        </nav>
+    </div>
 
+    <script>
+        // Mobile Drawer Toggle
+        const toggle = document.getElementById('nav-toggle');
+        const closeMenu = document.getElementById('close-menu');
+        const slideMenu = document.getElementById('slide-menu');
+        
+        if (toggle && slideMenu) {
+            toggle.addEventListener('click', () => {
+                slideMenu.classList.add('open');
+            });
+        }
+        if (closeMenu && slideMenu) {
+            closeMenu.addEventListener('click', () => {
+                slideMenu.classList.remove('open');
+            });
+        }
+
+        // Theme Cycle (dark/soft)
         (function () {
             const root = document.documentElement;
             const btnMobile = document.getElementById('theme-toggle');
@@ -115,28 +147,22 @@
             const iconDesktop = document.getElementById('theme-icon-desktop');
 
             function getThemeIcon(theme) {
-                if (theme === 'darker') return 'ti-moon-stars';
-                if (theme === 'soft') return 'ti-sun';
-                return 'ti-moon';
+                return theme === 'soft' ? 'ti-sun' : 'ti-moon';
             }
 
             function applyTheme(theme) {
-                if (theme === 'darker' || theme === 'soft') {
-                    root.setAttribute('data-theme', theme);
+                if (theme === 'soft') {
+                    root.setAttribute('data-theme', 'soft');
                 } else {
                     root.removeAttribute('data-theme');
                 }
-
-                const iconClass = getThemeIcon(theme);
-                if (btnMobile) btnMobile.setAttribute('aria-pressed', theme !== 'darker');
-                if (btnDesktop) btnDesktop.setAttribute('aria-pressed', theme !== 'darker');
                 
-                if (iconMobile) {
-                    iconMobile.className = 'ti ' + iconClass;
-                }
-                if (iconDesktop) {
-                    iconDesktop.className = 'ti ' + iconClass;
-                }
+                const iconClass = getThemeIcon(theme);
+                if (btnMobile) btnMobile.setAttribute('aria-pressed', theme === 'soft');
+                if (btnDesktop) btnDesktop.setAttribute('aria-pressed', theme === 'soft');
+                
+                if (iconMobile) iconMobile.className = 'ti ' + iconClass;
+                if (iconDesktop) iconDesktop.className = 'ti ' + iconClass;
             }
 
             const saved = localStorage.getItem('site-theme');
@@ -145,18 +171,13 @@
 
             function cycleTheme() {
                 const current = root.getAttribute('data-theme') || 'darker';
-                const next = current === 'darker' ? 'soft' : 'darker';
+                const next = current === 'soft' ? 'darker' : 'soft';
                 applyTheme(next);
                 localStorage.setItem('site-theme', next);
             }
 
-            if (btnMobile) {
-                btnMobile.addEventListener('click', cycleTheme);
-            }
-
-            if (btnDesktop) {
-                btnDesktop.addEventListener('click', cycleTheme);
-            }
+            if (btnMobile) btnMobile.addEventListener('click', cycleTheme);
+            if (btnDesktop) btnDesktop.addEventListener('click', cycleTheme);
         })();
     </script>
 

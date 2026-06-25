@@ -4,27 +4,75 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Explorer</title>
+  <title>Explorer | DIU Notes Buddy</title>
   <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="stylesheet" href="../explorer.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="explorer.css">
 </head>
 
 <body>
 
-  <aside>
-    <div class="nav-header">Explorer</div>
-    <a href="/" class="nav-item back" id="back-button">
-      <span>← Go Back</span>
-    </a>
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <a href="/" class="brand">
+        <img src="favicon.png" alt="Logo" class="brand-icon-img">
+        <span>Notes Buddy</span>
+      </a>
+      
+      <nav class="sidebar-nav">
+        <a href="/" class="nav-item">
+          <i class="ti ti-smart-home"></i>
+          <span>Home</span>
+        </a>
+        <a href="/explorer.html" class="nav-item active">
+          <i class="ti ti-folder"></i>
+          <span>Explorer</span>
+        </a>
+        <a href="/pages/contribute.html" class="nav-item">
+          <i class="ti ti-hand-stop"></i>
+          <span>Contribute</span>
+        </a>
+        <a href="/pages/support.html" class="nav-item">
+          <i class="ti ti-heart"></i>
+          <span>Support Us</span>
+        </a>
+      </nav>
+    </div>
+
+    <div class="sidebar-bottom">
+      <a href="/" class="nav-item back-btn" id="back-button">
+        <i class="ti ti-arrow-left"></i>
+        <span>Go Back</span>
+      </a>
+      
+      <button class="theme-toggle" id="theme-toggle" title="Toggle theme">
+        <i class="ti ti-moon" id="theme-icon"></i>
+      </button>
+    </div>
   </aside>
 
-  <main>
-    <header>
-      <h1 id="header-title">Loading...</h1>
+  <main class="explorer-main">
+    <header class="explorer-header">
+      <div class="header-path" id="header-breadcrumbs">
+        <span class="breadcrumb-item">Explorer</span>
+      </div>
+      
+      <div class="search-wrapper">
+        <i class="ti ti-search search-icon"></i>
+        <input type="text" id="file-search" placeholder="Filter this view..." autocomplete="off">
+      </div>
     </header>
 
     <section class="file-grid" id="file-grid">
-      </section>
+      <!-- Dynamically filled grid -->
+      <div class="loading-state">
+        <div class="spinner"></div>
+        <p>Loading database...</p>
+      </div>
+    </section>
   </main>
 
   <script>
@@ -32,23 +80,30 @@
       const MANIFEST_URL = 'https://raw.githubusercontent.com/oceanmallik/DIUNotesBuddyDATABASE/main/manifest.json';
       
       const grid = document.getElementById('file-grid');
-      const headerTitle = document.getElementById('header-title');
+      const breadcrumbsContainer = document.getElementById('header-breadcrumbs');
       const backButton = document.getElementById('back-button');
+      const searchInput = document.getElementById('file-search');
       
+      let manifestData = null;
+
       async function initializeExplorer() {
         try {
           const response = await fetch(MANIFEST_URL);
           if (!response.ok) throw new Error('Failed to connect to the database.');
-          const data = await response.json();
-          renderCurrentView(data);
+          manifestData = await response.json();
+          renderCurrentView(manifestData);
         } catch (error) {
-          grid.innerHTML = `<div style="grid-column: 1 / -1; color: #FF5252; text-align: center; padding: 40px;">Connection Error: ${error.message}</div>`;
-          headerTitle.textContent = "Error";
+          grid.innerHTML = `
+            <div class="error-container">
+              <i class="ti ti-alert-triangle error-icon"></i>
+              <h3>Connection Error</h3>
+              <p>${error.message}</p>
+              <button onclick="window.location.reload()" class="retry-btn">Retry Connection</button>
+            </div>`;
         }
       }
 
       function renderCurrentView(data) {
-        // 1. Grab all parameters from the URL
         const urlParams = new URLSearchParams(window.location.search);
         const deptId = urlParams.get('dept');
         const yearId = urlParams.get('year');
@@ -61,16 +116,22 @@
         let backLink = "/";
         let htmlContent = "";
 
-        // 2. Fast & Safe Tree Traversal (Find exactly where the user is in the database)
+        // Fast & Safe Tree Traversal
         let d = null, y = null, s = null, sub = null;
         if (deptId && data.departments) d = data.departments.find(x => x.id === deptId);
         if (d && yearId) y = d.years.find(x => x.id === yearId);
         if (y && semId) s = y.semesters.find(x => x.id === semId);
         if (s && subjectId) sub = s.subjects.find(x => x.id === subjectId);
 
-        // 3. Render the correct UI based on how deep the user clicked
+        // Build Dynamic Breadcrumbs
+        breadcrumbsContainer.innerHTML = buildBreadcrumbsHTML(data, deptId, yearId, semId, subjectId, categoryId, topicId);
+
+        // Reset search input
+        if (searchInput) searchInput.value = '';
+
+        // Render levels
         if (sub && categoryId && topicId) {
-          // LEVEL 6: Display Files inside a specific Topic
+          // LEVEL 6: Files in specific Topic
           currentTitle = topicId;
           backLink = `?dept=${deptId}&year=${yearId}&sem=${semId}&subject=${subjectId}&category=${categoryId}`;
           
@@ -82,27 +143,26 @@
               htmlContent += createFileCard(f.filename, f.url);
             });
           } else {
-            htmlContent = `<div style="grid-column: 1 / -1; color: var(--muted); padding: 40px;">No files found in this topic.</div>`;
+            htmlContent = `<div class="empty-state"><i class="ti ti-folder-off"></i><p>No files found in this topic.</p></div>`;
           }
 
         } else if (sub && categoryId) {
-          // LEVEL 5: Display Topic Folders inside a Category (Midterm/Final)
-          currentTitle = categoryId.charAt(0).toUpperCase() + categoryId.slice(1); // Capitalizes the category name
+          // LEVEL 5: Topics in Category (Midterm/Final)
+          currentTitle = categoryId.charAt(0).toUpperCase() + categoryId.slice(1);
           backLink = `?dept=${deptId}&year=${yearId}&sem=${semId}&subject=${subjectId}`;
           
           const topicsArray = sub.materials[categoryId] || [];
           if (topicsArray.length > 0) {
             topicsArray.forEach(t => {
-              // encodeURIComponent ensures spaces in topic names don't break the URL
               const nextUrl = `?dept=${deptId}&year=${yearId}&sem=${semId}&subject=${subjectId}&category=${categoryId}&topic=${encodeURIComponent(t.topic)}`;
-              htmlContent += createFolderCard(t.topic, nextUrl);
+              htmlContent += createFolderCard(t.topic, nextUrl, 'Topic Folder');
             });
           } else {
-            htmlContent = `<div style="grid-column: 1 / -1; color: var(--muted); padding: 40px;">No topics found in this category.</div>`;
+            htmlContent = `<div class="empty-state"><i class="ti ti-folder-off"></i><p>No topics found in this category.</p></div>`;
           }
 
         } else if (sub) {
-          // LEVEL 4: Display Category Folders (Midterm, Final) inside a Subject
+          // LEVEL 4: Category Folders (Midterm, Final) inside Subject
           currentTitle = sub.title;
           backLink = `?dept=${deptId}&year=${yearId}&sem=${semId}`;
           let hasCategories = false;
@@ -111,89 +171,226 @@
             if (topicsArray && topicsArray.length > 0) {
               hasCategories = true;
               const nextUrl = `?dept=${deptId}&year=${yearId}&sem=${semId}&subject=${subjectId}&category=${catName}`;
-              htmlContent += createFolderCard(catName.charAt(0).toUpperCase() + catName.slice(1), nextUrl);
+              htmlContent += createFolderCard(catName.charAt(0).toUpperCase() + catName.slice(1), nextUrl, 'Exam Material');
             }
           });
           
           if (!hasCategories) {
-            htmlContent = `<div style="grid-column: 1 / -1; color: var(--muted); padding: 40px;">No materials uploaded for this subject yet.</div>`;
+            htmlContent = `<div class="empty-state"><i class="ti ti-folder-off"></i><p>No study materials uploaded for this subject yet.</p></div>`;
           }
 
         } else if (s) {
-          // LEVEL 3: Display Subject Folders inside a Semester
+          // LEVEL 3: Subject Folders in Semester
           currentTitle = s.label;
           backLink = `?dept=${deptId}&year=${yearId}`;
           s.subjects.forEach(subItem => {
             const nextUrl = `?dept=${deptId}&year=${yearId}&sem=${semId}&subject=${subItem.id}`;
-            htmlContent += createFolderCard(subItem.title, nextUrl);
+            htmlContent += createFolderCard(subItem.title, nextUrl, 'Course Folder');
           });
 
         } else if (y) {
-          // LEVEL 2: Display Semester Folders inside a Year
+          // LEVEL 2: Semester Folders in Year
           currentTitle = y.label;
           backLink = `?dept=${deptId}`;
           y.semesters.forEach(semItem => {
             const nextUrl = `?dept=${deptId}&year=${yearId}&sem=${semItem.id}`;
-            htmlContent += createFolderCard(semItem.label, nextUrl);
+            htmlContent += createFolderCard(semItem.label, nextUrl, 'Semester Folder');
           });
 
         } else if (d) {
-          // LEVEL 1: Display Year Folders inside a Department
+          // LEVEL 1: Year Folders in Department
           currentTitle = d.title;
           backLink = "?";
           d.years.forEach(yearItem => {
             const nextUrl = `?dept=${deptId}&year=${yearItem.id}`;
-            htmlContent += createFolderCard(yearItem.label, nextUrl);
+            htmlContent += createFolderCard(yearItem.label, nextUrl, 'Year Folder');
           });
 
         } else {
-          // LEVEL 0: Root - Display Department Folders
+          // LEVEL 0: Department Folders (Root)
           currentTitle = "Select Department";
-          backLink = "/"; // Modify this if your website homepage is a different URL
+          backLink = "/";
           if (data.departments) {
             data.departments.forEach(deptItem => {
-              htmlContent += createFolderCard(deptItem.title, `?dept=${deptItem.id}`);
+              htmlContent += createFolderCard(deptItem.title, `?dept=${deptItem.id}`, 'Department Folder');
             });
           }
         }
 
-        // 4. Paint the UI
-        document.title = `${currentTitle} | Explorer`;
-        headerTitle.textContent = currentTitle;
+        // Apply back links & paint view
+        document.title = `${currentTitle} | Notes Explorer`;
         backButton.href = backLink;
         grid.innerHTML = htmlContent;
       }
 
-      function createFolderCard(title, href) {
+      function buildBreadcrumbsHTML(data, deptId, yearId, semId, subjectId, categoryId, topicId) {
+        let html = `<a href="explorer.html" class="breadcrumb-item"><i class="ti ti-folder"></i> Explorer</a>`;
+        
+        let d = null, y = null, s = null, sub = null;
+        if (deptId && data.departments) {
+          d = data.departments.find(x => x.id === deptId);
+          if (d) {
+            html += ` <i class="ti ti-chevron-right breadcrumb-separator"></i> <a href="?dept=${d.id}" class="breadcrumb-item">${d.title}</a>`;
+          }
+        }
+        if (d && yearId) {
+          y = d.years.find(x => x.id === yearId);
+          if (y) {
+            html += ` <i class="ti ti-chevron-right breadcrumb-separator"></i> <a href="?dept=${d.id}&year=${y.id}" class="breadcrumb-item">${y.label}</a>`;
+          }
+        }
+        if (y && semId) {
+          s = y.semesters.find(x => x.id === semId);
+          if (s) {
+            html += ` <i class="ti ti-chevron-right breadcrumb-separator"></i> <a href="?dept=${d.id}&year=${y.id}&sem=${s.id}" class="breadcrumb-item">${s.label}</a>`;
+          }
+        }
+        if (s && subjectId) {
+          sub = s.subjects.find(x => x.id === subjectId);
+          if (sub) {
+            html += ` <i class="ti ti-chevron-right breadcrumb-separator"></i> <a href="?dept=${d.id}&year=${y.id}&sem=${s.id}&subject=${sub.id}" class="breadcrumb-item">${sub.title}</a>`;
+          }
+        }
+        if (sub && categoryId) {
+          const categoryLabel = categoryId.charAt(0).toUpperCase() + categoryId.slice(1);
+          html += ` <i class="ti ti-chevron-right breadcrumb-separator"></i> <a href="?dept=${d.id}&year=${y.id}&sem=${s.id}&subject=${sub.id}&category=${categoryId}" class="breadcrumb-item">${categoryLabel}</a>`;
+        }
+        if (sub && categoryId && topicId) {
+          html += ` <i class="ti ti-chevron-right breadcrumb-separator"></i> <span class="breadcrumb-item active">${topicId}</span>`;
+        }
+        return html;
+      }
+
+      function createFolderCard(title, href, badge) {
         return `
-        <a href="${href}" class="file-card">
+        <a href="${href}" class="file-card folder-type">
           <div class="card-header">
-            <div class="icon-wrapper">📁</div>
-            <span class="file-badge badge-folder">Folder</span>
+            <div class="icon-wrapper"><i class="ti ti-folder"></i></div>
+            <span class="file-badge badge-folder">${badge}</span>
           </div>
           <span class="file-name">${title}</span>
           <div class="file-meta">
-            <span class="file-type">📂 Directory</span>
+            <span class="file-type"><i class="ti ti-subfolder"></i> View Contents</span>
           </div>
         </a>`;
       }
 
       function createFileCard(title, url) {
+        let fileExt = title.split('.').pop().toLowerCase();
+        let iconClass = 'ti-file';
+        let badgeText = 'File';
+        
+        if (fileExt === 'pdf') {
+          iconClass = 'ti-file-pdf';
+          badgeText = 'PDF';
+        } else if (['docx', 'doc'].includes(fileExt)) {
+          iconClass = 'ti-file-word';
+          badgeText = 'Word';
+        } else if (['pptx', 'ppt'].includes(fileExt)) {
+          iconClass = 'ti-presentation';
+          badgeText = 'Slides';
+        }
+
         return `
-        <a href="${url}" target="_blank" rel="noopener noreferrer" class="file-card">
+        <a href="${url}" target="_blank" rel="noopener noreferrer" class="file-card file-type-card">
           <div class="card-header">
-            <div class="icon-wrapper">📄</div>
-            <span class="file-badge badge-file">File</span>
+            <div class="icon-wrapper"><i class="ti ${iconClass}"></i></div>
+            <span class="file-badge badge-file">${badgeText}</span>
           </div>
           <span class="file-name">${title}</span>
           <div class="file-meta">
-            <span class="file-type">📄 PDF Document</span>
+            <span class="file-type"><i class="ti ti-download"></i> Download / View</span>
           </div>
         </a>`;
       }
 
+      // Live search filter input
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase().trim();
+          const cards = document.querySelectorAll('.file-card');
+          let visibleCount = 0;
+          
+          cards.forEach(card => {
+            const name = card.querySelector('.file-name').textContent.toLowerCase();
+            if (name.includes(query)) {
+              card.style.display = 'flex';
+              visibleCount++;
+            } else {
+              card.style.display = 'none';
+            }
+          });
+          
+          // Remove previous no-match placeholder if it exists
+          const existingNoMatch = grid.querySelector('.no-match');
+          if (existingNoMatch) existingNoMatch.remove();
+          
+          if (visibleCount === 0 && cards.length > 0) {
+            const noMatchDiv = document.createElement('div');
+            noMatchDiv.className = 'empty-state no-match';
+            noMatchDiv.innerHTML = `<i class="ti ti-search-off"></i><p>No results match "${query}"</p>`;
+            grid.appendChild(noMatchDiv);
+          }
+        });
+      }
+
+      // Listen for back button pushes in history to render without hard refresh
+      window.addEventListener('popstate', () => {
+        if (manifestData) renderCurrentView(manifestData);
+      });
+
+      // Override click events on folder cards to support fast SPA navigation
+      grid.addEventListener('click', (e) => {
+        const card = e.target.closest('.file-card.folder-type');
+        if (card) {
+          e.preventDefault();
+          const href = card.getAttribute('href');
+          history.pushState(null, '', href);
+          renderCurrentView(manifestData);
+        }
+      });
+      
+      backButton.addEventListener('click', (e) => {
+        const href = backButton.getAttribute('href');
+        if (href && href.startsWith('?')) {
+          e.preventDefault();
+          history.pushState(null, '', href);
+          renderCurrentView(manifestData);
+        }
+      });
+
       initializeExplorer();
     });
+
+    // Theme Toggle Logic
+    (function () {
+      const root = document.documentElement;
+      const btn = document.getElementById('theme-toggle');
+      const icon = document.getElementById('theme-icon');
+
+      function applyTheme(theme) {
+        if (theme === 'soft') {
+          root.setAttribute('data-theme', 'soft');
+          if (icon) icon.className = 'ti ti-sun';
+        } else {
+          root.removeAttribute('data-theme');
+          if (icon) icon.className = 'ti ti-moon';
+        }
+      }
+
+      const saved = localStorage.getItem('site-theme');
+      if (saved) applyTheme(saved);
+      else applyTheme('darker');
+
+      if (btn) {
+        btn.addEventListener('click', () => {
+          const current = root.getAttribute('data-theme') || 'darker';
+          const next = current === 'soft' ? 'darker' : 'soft';
+          applyTheme(next);
+          localStorage.setItem('site-theme', next);
+        });
+      }
+    })();
   </script>
 
 </body>

@@ -4,13 +4,22 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Privacy Policy — DIU Notes Buddy</title>
+	<title>Privacy Policy | DIU Notes Buddy</title>
 	<meta name="description" content="Privacy policy for DIU Notes Buddy website and app.">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 	<link rel="icon" type="image/png" href="../favicon.png">
 	<link rel="stylesheet" href="privacy.css">
+	<script>
+		// Apply site theme before render to prevent flash
+		(function () {
+			const saved = localStorage.getItem('site-theme');
+			if (saved === 'soft') {
+				document.documentElement.setAttribute('data-theme', 'soft');
+			}
+		})();
+	</script>
 </head>
 
 <body>
@@ -19,88 +28,53 @@
 			<div class="hero__badge">DIU Notes Buddy</div>
 			<h1>Privacy Policy</h1>
 			<p class="intro">
-				This Privacy Policy explains how DIU Notes Buddy handles information when you use the Android app or
-				visit the website. The app is designed to provide study notes, text, and images fetched from public
-				GitHub repositories.
+				This Privacy Policy explains how DIU Notes Buddy handles user accounts, files, and advertisements when you use the Android application or visit our web catalog.
 			</p>
+			
 			<div class="policy-content">
 				<h2>Privacy Policy for DIU Notes</h2>
-				<p><strong>Last Updated: June 22, 2026</strong></p>
-				<p>Ocean Mallik ("we," "us," or "our") operates the DIU Notes Android application (the "Application").
-					This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you
-					use our Application. Please read this Privacy Policy carefully. If you do not agree with the terms
-					of this Privacy Policy, please do not access the application.</p>
+				<p><strong>Last Updated: June 25, 2026</strong></p>
+				
+				<p>Ocean Mallik ("we," "us," or "our") operates the DIU Notes Android application (the "Application"). This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our Application. Please read this Privacy Policy carefully. If you do not agree with the terms of this Privacy Policy, please do not access the application.</p>
 
 				<h2>1. Information We Collect</h2>
 				<p><strong>A. User Account Information</strong><br>
-					You have the option to use DIU Notes anonymously or to create an account. If you use the app without
-					logging in, we do not collect any personal identity information. If you choose to log in using
-					third-party providers (Google or GitHub) via our authentication provider, Supabase, we collect your
-					Name, Email Address, and Profile Picture. This information is used solely to create and manage your
-					user profile within the app.</p>
+				You have the option to use DIU Notes anonymously or to create an account. If you use the app without logging in, we do not collect any personal identity information. If you choose to log in using third-party providers (Google or GitHub) via our authentication provider, Supabase, we collect your Name, Email Address, and Profile Picture. This information is used solely to create and manage your user profile within the app.</p>
 
 				<p><strong>B. User-Generated Content (Notes and PDFs)</strong><br>
-					DIU Notes allows you to create text notes and attach PDF files. This content is transmitted securely
-					and stored using GitHub. We rely on Android’s native file picker to allow you to upload PDFs. We do
-					not request broad read/write storage permissions to your device; you retain full control over which
-					specific files you select and upload to the Application.</p>
+				DIU Notes allows you to create text notes and attach PDF files. This content is transmitted securely and stored using GitHub. We rely on Android’s native file picker to allow you to upload PDFs. We do not request broad read/write storage permissions to your device; you retain full control over which specific files you select and upload to the Application.</p>
 
 				<p><strong>C. Automatically Collected Information & Advertising</strong><br>
-					Our Application integrates with Google AdMob to display advertisements. AdMob automatically collects
-					certain device information, such as your IP address, device identifiers (like the Android
-					Advertising ID), and usage data to serve relevant ads.</p>
+				Our Application integrates with Google AdMob to display advertisements. AdMob automatically collects certain device information, such as your IP address, device identifiers (like the Android Advertising ID), and usage data to serve relevant ads.</p>
 
 				<h2>2. Third-Party Services We Use</h2>
-				<p>The Application utilizes third-party services that may collect information used to identify you. The
-					third-party service providers used by this Application include Supabase (for secure user
-					authentication and session management), GitHub (as the backend storage mechanism for your notes and
-					PDF files), and Google AdMob (for displaying advertisements within the Application). You can review
-					the privacy policies of these third-party providers on their respective websites.</p>
+				<p>The Application utilizes third-party services that may collect information used to identify you. The third-party service providers used by this Application include Supabase (for secure user authentication and session management), GitHub (as the backend storage mechanism for your notes and PDF files), and Google AdMob (for displaying advertisements within the Application). You can review the privacy policies of these third-party providers on their respective websites.</p>
 
 				<h2>3. Device Permissions</h2>
-				<p>DIU Notes is designed to respect your privacy and minimizes permission requests. We do not explicitly
-					ask for runtime permissions for your contacts, camera, or background location. When attaching a PDF,
-					the Application utilizes the system's built-in file picker, meaning the app only gains access to the
-					specific file you choose to share with it. While the app requires standard internet access to sync
-					notes, handle authentication, and load advertisements, it does not require special network
-					permission prompts from the user.</p>
+				<p>DIU Notes is designed to respect your privacy and minimizes permission requests. We do not explicitly ask for runtime permissions for your contacts, camera, or background location. When attaching a PDF, the Application utilizes the system's built-in file picker, meaning the app only gains access to the specific file you choose to share with it. While the app requires standard internet access to sync notes, handle authentication, and load advertisements, it does not require special network permission prompts from the user.</p>
 
 				<h2>4. How We Use Your Information</h2>
-				<p>We use the information we collect to create and manage your account securely, sync and retrieve your
-					notes and PDF files across devices, serve advertisements to support the development of the
-					Application, and respond to your customer service requests.</p>
+				<p>We use the information we collect to create and manage your account securely, sync and retrieve your notes and PDF files across devices, serve advertisements to support the development of the Application, and respond to your customer service requests.</p>
 
 				<h2>5. Data Retention and Deletion</h2>
-				<p>You have the right to request the deletion of your personal data and account information at any time.
-					If you wish to have your account, profile data (name, email, profile picture), and stored notes
-					(including PDFs) permanently deleted from our systems, please send an email request to
-					<strong>oceanmallik@oceanmallik.com</strong>. Please include the email address associated with your
-					DIU Notes account so we can locate and remove your data. We will process your deletion request
-					promptly upon receipt.</p>
+				<p>You have the right to request the deletion of your personal data and account information at any time. If you wish to have your account, profile data (name, email, profile picture), and stored notes (including PDFs) permanently deleted from our systems, please send an email request to <strong>oceanmallik@oceanmallik.com</strong>. Please include the email address associated with your DIU Notes account so we can locate and remove your data. We will process your deletion request promptly upon receipt.</p>
 
 				<h2>6. Security of Your Data</h2>
-				<p>We use administrative, technical, and physical security measures to help protect your personal
-					information. Authentication is handled securely through Supabase, and notes are transmitted securely
-					to GitHub. However, please be aware that no method of transmission over the internet or method of
-					electronic storage is 100% secure, and we cannot guarantee absolute security.</p>
+				<p>We use administrative, technical, and physical security measures to help protect your personal information. Authentication is handled securely through Supabase, and notes are transmitted securely to GitHub. However, please be aware that no method of transmission over the internet or method of electronic storage is 100% secure, and we cannot guarantee absolute security.</p>
 
 				<h2>7. Children's Privacy</h2>
-				<p>The Application does not knowingly collect personally identifiable information from children under
-					the age of 13. If you become aware that we have collected personal data from a child under 13,
-					please contact us at the email address below so we can take steps to remove that information.</p>
+				<p>The Application does not knowingly collect personally identifiable information from children under the age of 13. If you become aware that we have collected personal data from a child under 13, please contact us at the email address below so we can take steps to remove that information.</p>
 
 				<h2>8. Changes to This Privacy Policy</h2>
-				<p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the
-					new Privacy Policy on this page and updating the "Last Updated" date at the top. You are advised to
-					review this Privacy Policy periodically for any changes.</p>
+				<p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date at the top. You are advised to review this Privacy Policy periodically for any changes.</p>
 
 				<h2>9. Contact Us</h2>
-				<p>If you have any questions about this Privacy Policy, contact us at <a
-						href="mailto:oceanmallik@oceanmallik.com">oceanmallik@oceanmallik.com</a>.</p>
+				<p>If you have any questions about this Privacy Policy, contact us at <a href="mailto:oceanmallik@oceanmallik.com">oceanmallik@oceanmallik.com</a>.</p>
 			</div>
+			
 			<div class="hero__meta">
-				<span>Last updated: [Insert Date]</span>
-				<a href="../index.html">Back to home</a>
+				<span>Last updated: June 25, 2026</span>
+				<a href="../">Back to Home</a>
 			</div>
 		</section>
 	</main>
