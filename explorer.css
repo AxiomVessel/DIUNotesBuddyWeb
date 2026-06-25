@@ -747,3 +747,110 @@ aside.sidebar {
         margin-bottom: 0.5rem;
     }
 }
+
+/* ==========================================================================
+   App Download Promo
+   ========================================================================== */
+.app-download-promo {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.85rem;
+    box-shadow: var(--shadow);
+    z-index: 100;
+    text-decoration: none;
+    color: var(--text);
+    transition: var(--transition);
+    width: 200px;
+}
+
+.app-download-promo:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 20px rgba(var(--accent-rgb), 0.2);
+}
+
+:root[data-theme='soft'] .app-download-promo:hover {
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.1), 0 0 15px rgba(var(--accent-rgb), 0.15);
+}
+
+.qr-img-wrapper {
+    background: #ffffff;
+    padding: 0.5rem;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+    transition: var(--transition);
+}
+
+.app-download-promo:hover .qr-img-wrapper {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(var(--accent-rgb), 0.2);
+}
+
+.qr-img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+.promo-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.promo-text strong {
+    font-size: 1rem;
+    color: var(--text);
+    font-weight: 700;
+}
+
+.promo-text span {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    line-height: 1.3;
+    margin-top: 0.25rem;
+}
+
+@media (max-width: 768px) {
+    .app-download-promo {
+        bottom: 1.5rem;
+        right: 1.5rem;
+        padding: 1rem;
+        width: 160px;
+        gap: 0.65rem;
+    }
+    
+    .promo-text strong {
+        font-size: 0.9rem;
+    }
+    
+    .promo-text span {
+        font-size: 0.65rem;
+    }
+    
+    .qr-img {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+@media (max-width: 640px) {
+    .app-download-promo {
+        display: none;
+    }
+}

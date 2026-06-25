@@ -9,7 +9,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="explorer.css">
 </head>
 
@@ -21,7 +23,7 @@
         <img src="favicon.png" alt="Logo" class="brand-icon-img">
         <span>Notes Buddy</span>
       </a>
-      
+
       <nav class="sidebar-nav">
         <a href="/" class="nav-item">
           <i class="ti ti-smart-home"></i>
@@ -47,7 +49,7 @@
         <i class="ti ti-arrow-left"></i>
         <span>Go Back</span>
       </a>
-      
+
       <button class="theme-toggle" id="theme-toggle" title="Toggle theme">
         <i class="ti ti-moon" id="theme-icon"></i>
       </button>
@@ -59,7 +61,7 @@
       <div class="header-path" id="header-breadcrumbs">
         <span class="breadcrumb-item">Explorer</span>
       </div>
-      
+
       <div class="search-wrapper">
         <i class="ti ti-search search-icon"></i>
         <input type="text" id="file-search" placeholder="Filter this view..." autocomplete="off">
@@ -75,15 +77,27 @@
     </section>
   </main>
 
+  <!-- App Download Promo -->
+  <a href="https://play.google.com/store/apps/details?id=com.oceanmallik.diunote" target="_blank"
+    rel="noopener noreferrer" class="app-download-promo">
+    <div class="qr-img-wrapper">
+      <img src="webAssets/appQR.png" alt="App QR Code" class="qr-img">
+    </div>
+    <div class="promo-text">
+      <strong>Get the App!</strong>
+      <span>Available on Play Store</span>
+    </div>
+  </a>
+
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const MANIFEST_URL = 'https://raw.githubusercontent.com/oceanmallik/DIUNotesBuddyDATABASE/main/manifest.json';
-      
+
       const grid = document.getElementById('file-grid');
       const breadcrumbsContainer = document.getElementById('header-breadcrumbs');
       const backButton = document.getElementById('back-button');
       const searchInput = document.getElementById('file-search');
-      
+
       let manifestData = null;
 
       async function initializeExplorer() {
@@ -134,10 +148,10 @@
           // LEVEL 6: Files in specific Topic
           currentTitle = topicId;
           backLink = `?dept=${deptId}&year=${yearId}&sem=${semId}&subject=${subjectId}&category=${categoryId}`;
-          
+
           const topicsArray = sub.materials[categoryId] || [];
           const topicData = topicsArray.find(t => t.topic === topicId);
-          
+
           if (topicData && topicData.files && topicData.files.length > 0) {
             topicData.files.forEach(f => {
               htmlContent += createFileCard(f.filename, f.url);
@@ -150,7 +164,7 @@
           // LEVEL 5: Topics in Category (Midterm/Final)
           currentTitle = categoryId.charAt(0).toUpperCase() + categoryId.slice(1);
           backLink = `?dept=${deptId}&year=${yearId}&sem=${semId}&subject=${subjectId}`;
-          
+
           const topicsArray = sub.materials[categoryId] || [];
           if (topicsArray.length > 0) {
             topicsArray.forEach(t => {
@@ -166,7 +180,7 @@
           currentTitle = sub.title;
           backLink = `?dept=${deptId}&year=${yearId}&sem=${semId}`;
           let hasCategories = false;
-          
+
           Object.entries(sub.materials).forEach(([catName, topicsArray]) => {
             if (topicsArray && topicsArray.length > 0) {
               hasCategories = true;
@@ -174,7 +188,7 @@
               htmlContent += createFolderCard(catName.charAt(0).toUpperCase() + catName.slice(1), nextUrl, 'Exam Material');
             }
           });
-          
+
           if (!hasCategories) {
             htmlContent = `<div class="empty-state"><i class="ti ti-folder-off"></i><p>No study materials uploaded for this subject yet.</p></div>`;
           }
@@ -225,7 +239,7 @@
 
       function buildBreadcrumbsHTML(data, deptId, yearId, semId, subjectId, categoryId, topicId) {
         let html = `<a href="explorer.html" class="breadcrumb-item"><i class="ti ti-folder"></i> Explorer</a>`;
-        
+
         let d = null, y = null, s = null, sub = null;
         if (deptId && data.departments) {
           d = data.departments.find(x => x.id === deptId);
@@ -279,7 +293,7 @@
         let fileExt = title.split('.').pop().toLowerCase();
         let iconClass = 'ti-file';
         let badgeText = 'File';
-        
+
         if (fileExt === 'pdf') {
           iconClass = 'ti-file-pdf';
           badgeText = 'PDF';
@@ -310,7 +324,7 @@
           const query = e.target.value.toLowerCase().trim();
           const cards = document.querySelectorAll('.file-card');
           let visibleCount = 0;
-          
+
           cards.forEach(card => {
             const name = card.querySelector('.file-name').textContent.toLowerCase();
             if (name.includes(query)) {
@@ -320,11 +334,11 @@
               card.style.display = 'none';
             }
           });
-          
+
           // Remove previous no-match placeholder if it exists
           const existingNoMatch = grid.querySelector('.no-match');
           if (existingNoMatch) existingNoMatch.remove();
-          
+
           if (visibleCount === 0 && cards.length > 0) {
             const noMatchDiv = document.createElement('div');
             noMatchDiv.className = 'empty-state no-match';
@@ -349,7 +363,7 @@
           renderCurrentView(manifestData);
         }
       });
-      
+
       backButton.addEventListener('click', (e) => {
         const href = backButton.getAttribute('href');
         if (href && href.startsWith('?')) {
@@ -394,4 +408,5 @@
   </script>
 
 </body>
+
 </html>
