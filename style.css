@@ -157,14 +157,21 @@ body::before {
 /* Header & Navigation */
 .site-header {
     background: var(--glass);
-    backdrop-filter: blur(16px) saturate(140%);
-    -webkit-backdrop-filter: blur(16px) saturate(140%);
     position: sticky;
     top: 0;
     z-index: 100;
     border-bottom: 1px solid var(--border);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
     transition: var(--transition);
+}
+
+.site-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    z-index: -1;
 }
 
 .header-inner {
@@ -303,16 +310,58 @@ body::before {
 
 @media (max-width: 768px) {
     #nav-toggle {
-        display: block;
+        display: none;
     }
 
     .site-nav {
-        display: none;
-        /* Controlled via script with active slide menu */
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        flex-direction: row;
+        justify-content: space-around;
+        background: var(--glass);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-top: 1px solid var(--border);
+        padding: 0.5rem 0.5rem calc(0.5rem + env(safe-area-inset-bottom));
+        gap: 0.25rem;
+        z-index: 1000;
+        box-shadow: 0 -4px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    :root[data-theme='soft'] .site-nav {
+        background: rgba(255, 255, 255, 0.95);
+    }
+
+    .site-nav a {
+        flex-direction: column;
+        padding: 0.5rem 0.25rem;
+        font-size: 0.7rem;
+        border: none;
+        border-radius: 8px;
+        gap: 0.35rem;
+        flex: 1;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .site-nav a i {
+        font-size: 1.4rem;
+        margin: 0;
     }
 
     .theme-toggle-desktop {
         display: none !important;
+    }
+
+    .theme-toggle-mobile {
+        display: inline-flex !important;
+    }
+
+    body {
+        padding-bottom: calc(75px + env(safe-area-inset-bottom));
     }
 }
 
@@ -1195,7 +1244,7 @@ body::before {
 @media (max-width: 768px) {
     .floating-qr {
         width: 120px;
-        bottom: 1.5rem;
+        bottom: calc(85px + env(safe-area-inset-bottom));
         right: 1.5rem;
     }
 }

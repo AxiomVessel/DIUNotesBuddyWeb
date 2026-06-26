@@ -672,34 +672,86 @@ aside.sidebar {
         flex-direction: row;
         border-right: none;
         border-bottom: 1px solid var(--border);
-        padding: 1rem 1.5rem;
+        padding: 0.75rem 1.25rem;
         align-items: center;
+        justify-content: space-between;
     }
 
     .sidebar-top {
         flex-direction: row;
         align-items: center;
-        width: 100%;
-        justify-content: space-between;
+        width: auto;
+        gap: 1rem;
     }
 
     .sidebar-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
         flex-direction: row;
+        justify-content: space-around;
+        background: var(--glass);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-top: 1px solid var(--border);
+        padding: 0.5rem 0.5rem calc(0.5rem + env(safe-area-inset-bottom));
         gap: 0.25rem;
+        z-index: 1000;
+        box-shadow: 0 -4px 25px rgba(0, 0, 0, 0.15);
+    }
+    
+    :root[data-theme='soft'] .sidebar-nav {
+        background: rgba(255, 255, 255, 0.95);
     }
 
     .nav-item {
-        padding: 0.5rem 0.75rem;
-        font-size: 0.88rem;
+        flex-direction: column;
+        padding: 0.5rem 0.25rem;
+        font-size: 0.7rem;
+        border: none;
+        border-radius: 8px;
+        gap: 0.35rem;
+        flex: 1;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .nav-item i {
+        font-size: 1.4rem;
+        margin: 0;
     }
 
     .sidebar-bottom {
+        display: flex;
+        padding-top: 0;
+        border-top: none;
+        width: auto;
+        gap: 0.5rem;
+    }
+
+    .back-btn {
+        flex: 0 0 auto;
+        padding: 0.5rem;
+        border-radius: 10px;
+    }
+
+    .back-btn span {
         display: none;
-        /* Hide bottom area on tablet-mobile horizontal headers */
+    }
+    
+    .theme-toggle {
+        width: 36px;
+        height: 36px;
     }
 
     .explorer-main {
-        height: calc(100vh - 72px);
+        flex: 1;
+        height: 0;
+    }
+
+    .file-grid {
+        padding-bottom: calc(90px + env(safe-area-inset-bottom));
     }
 }
 
@@ -828,7 +880,7 @@ aside.sidebar {
 
 @media (max-width: 768px) {
     .app-download-promo {
-        bottom: 1.5rem;
+        bottom: calc(85px + env(safe-area-inset-bottom));
         right: 1.5rem;
         padding: 1rem;
         width: 160px;
